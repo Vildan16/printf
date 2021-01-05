@@ -4,6 +4,16 @@
 
 #include <stdarg.h>
 #include <unistd.h>
+#include <stdio.h>  //remove
+
+typedef struct		s_params
+{
+	int				flag_zero;
+	int				flag_minus;
+	int				width;
+	int 			precision;
+	char 			type;
+}					t_params;
 
 int		ft_atoi(const char *nptr) //LIBFT
 {
@@ -39,33 +49,32 @@ void	ft_putchar(char c)
 
 char 	ft_get_type(const char *fmt)
 {
-	int	i;
+	char 	result;
 
-	i = 0;
-	while (fmt[i])
-	{
-		if (fmt[i] == 'i' || fmt[i] == 'd')
-			return('i');
-		if (fmt[i] == 'c')
-			return('c');
-		if (fmt[i] == 's')
-			return('s');
-		if (fmt[i] == 'p')
-			return('p');
-		if (fmt[i] == 'x')
-			return('x');
-		if (fmt[i] == 'x')
-			return('X');
-		if (fmt[i] == '%')
-			return('%');
-		i++;
-	}
+	result = '0';
+	printf("\nchar = %c\n", *fmt);
+	if (*fmt == 'i' || *fmt == 'd')
+		result = 'i';
+	else if (*fmt == 'c')
+		result = 'c';
+	else if (*fmt == 's')
+		result = 's';
+	else if (*fmt == 'p')
+		result = 'p';
+	else if (*fmt == 'x')
+		result = 'x';
+	else if (*fmt == 'X')
+		result = 'X';
+	else if (*fmt == '%')
+		result = '%';
+	return(result);
 }
 
 void	ft_get_flags(const char *fmt, int *flag_zero, int *flag_minus)
 {
 	*flag_zero = 0;
 	*flag_minus = 0;
+
 	while (*fmt == '-' || *fmt == '0')
 	{
 		if (*fmt == '0')
@@ -109,33 +118,53 @@ int		ft_get_precision(const char *fmt, va_list ap)
 	return(result);
 }
 
-void 	ft_handle(const char *fmt, va_list ap)
+void	ft_handle_i(t_params params, va_list ap)
 {
-	int		flag_zero;
-	int		flag_minus;
-	int		width;
-	int 	precision;
-	char 	type;
+	ft_putchar('A');
+}
 
-	type = ft_get_type(fmt);
-	ft_get_flags(fmt, &flag_zero, &flag_minus);
-	width = ft_get_width(fmt, &ap);
-	precision = ft_get_precision(fmt, &ap);
+int		ft_handle(const char *fmt, va_list ap)
+{
+	t_params params;
+
+	ft_get_flags(fmt, &params.flag_zero, &params.flag_minus);
+	params.width = ft_get_width(fmt, ap);
+	params.precision = ft_get_precision(fmt, ap);
+	params.type = ft_get_type(fmt);
+	if (params.type == '0')
+		return(0);
+	if (params.type == 'i' || params.type == 'd')
+		ft_handle_i(params, ap);
+
+/*	else if (params.type == 'c')
+		ft_handle_c(params, &ap);
+	else if (params.type == 's')
+		ft_handle_s(params, &ap);
+	else if (params.type == 'p')
+		ft_handle_p(params, &ap);
+	else if (params.type == 'x')
+		ft_handle_x(params, &ap);
+	else if (params.type == 'X')
+		ft_handle_X(params, &ap);
+	else if (params.type == '%')
+		ft_handle_percent(params, &ap);*/
+	return (1);
 }
 
 int		ft_printf(const char *fmt, ...)
 {
 	va_list ap;
-	int 	i;
 	int 	count;
 
 	count = 0;
-	i = 0;
 	va_start(ap, fmt);
 	while(*fmt)
 	{
 		if (*fmt == '%')
-			ft_handle(++fmt, &ap);
+		{
+			if (!ft_handle(++fmt, ap))
+				return(-1);
+		}
 		else
 		{
 			ft_putchar(*fmt);
@@ -149,6 +178,6 @@ int		ft_printf(const char *fmt, ...)
 
 int		main(void)
 {
-	ft_printf("abcd");
+	ft_printf("abc%0d");
 	return (0);
 }
