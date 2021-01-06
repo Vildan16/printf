@@ -189,7 +189,7 @@ int		ft_get_precision(const char **fmt, va_list *ap)
 	return(result);
 }
 
-static void		ft_putnbr(int n)
+static void		ft_putnbr(int n)  //LIBFT - mod
 {
 	int		i;
 	char	a[15];
@@ -218,20 +218,28 @@ static void		ft_putnbr(int n)
 		ft_putchar(a[i]);
 }
 
-void	ft_handle_i(t_params params, va_list *ap)
+void	ft_putstr(char *s)  //LIBFT - mod
+{
+	size_t	i;
+
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar(s[i]);
+		i++;
+	}
+}
+
+void	ft_handle_i(t_params params, va_list *ap, int *count)
 {
 	int len;
 	int arg;
-/*
-	printf("\nflag_minus = %i\n", params.flag_minus);
-	printf("flag_zero = %i\n", params.flag_zero);
-	printf("precision = %i\n", params.precision);
-	printf("width = %i\n", params.width);
 
- */
 	arg = va_arg(*ap, int);
 	len = ft_strlen(ft_itoa(arg));
-
+	*count += len;
 	if (params.precision != -1 || params.flag_minus)
 		params.flag_zero = 0;
 	if (!params.flag_minus && params.width >= len)
@@ -242,6 +250,7 @@ void	ft_handle_i(t_params params, va_list *ap)
 				ft_putchar('0');
 			else
 				ft_putchar(' ');
+			*count += 1;
 			len++;
 		}
 	}
@@ -250,6 +259,7 @@ void	ft_handle_i(t_params params, va_list *ap)
 		while (params.precision > len)
 		{
 			ft_putchar('0');
+			*count += 1;
 			len++;
 		}
 	}
@@ -262,12 +272,143 @@ void	ft_handle_i(t_params params, va_list *ap)
 				ft_putchar('0');
 			else
 				ft_putchar(' ');
+			*count += 1;
 			len++;
 		}
 	}
 }
 
-int		ft_handle(const char **fmt, va_list *ap)
+void	ft_handle_c(t_params params, va_list *ap, int *count)
+{
+	int arg;
+	int len;
+
+	arg = va_arg(*ap, int);
+	len = 1;
+	*count += len;
+	if (!params.flag_minus && params.width >= len)
+	{
+		while (params.width > len)
+		{
+			ft_putchar(' ');
+			*count += 1;
+			len++;
+		}
+	}
+	if (params.precision != -1)
+	{
+		while (params.precision > len)
+		{
+			ft_putchar('0');
+			*count += 1;
+			len++;
+		}
+	}
+	ft_putchar((char)arg);
+	if (params.flag_minus && params.width >= len)
+	{
+		while (params.width > len)
+		{
+			ft_putchar(' ');
+			*count += 1;
+			len++;
+		}
+	}
+}
+
+void	ft_handle_s(t_params params, va_list *ap, int *count)
+{
+	int		len;
+	char	*arg;
+	int 	i;
+
+	i = 0;
+	arg = va_arg(*ap, char*);
+	if ((int)ft_strlen(arg) <= params.precision || params.precision == -1)
+		len = ft_strlen(arg);
+	else
+		len = params.precision;
+	*count += len;
+	if (!params.flag_minus && params.width >= len)
+	{
+		while (params.width > len)
+		{
+			ft_putchar(' ');
+			*count += 1;
+			params.width--;
+		}
+	}
+	if (params.precision != -1)
+	{
+		while (i < len)
+		{
+			ft_putchar(*arg);
+			i++;
+			arg++;
+		}
+	}
+	else
+		ft_putstr(arg);
+	if (params.flag_minus && params.width >= len)
+	{
+		while (params.width > len)
+		{
+			ft_putchar(' ');
+			*count += 1;
+			len++;
+		}
+	}
+}
+
+void	ft_handle_p(t_params params, va_list *ap, int *count)
+{
+	int		len;
+	void	*arg;
+
+	arg = va_arg(*ap, void*);
+	len = ft_strlen((char *)arg);
+	printf("\narg = %s\n", arg);
+	printf("\nlen = %i\n", len);
+	*count += len;
+	if (params.precision != -1 || params.flag_minus)
+		params.flag_zero = 0;
+	if (!params.flag_minus && params.width >= len)
+	{
+		while (params.width > len)
+		{
+			if (params.flag_zero)
+				ft_putchar('0');
+			else
+				ft_putchar(' ');
+			*count += 1;
+			len++;
+		}
+	}
+	if (params.precision != -1)
+	{
+		while (params.precision > len)
+		{
+			ft_putchar('0');
+			*count += 1;
+			len++;
+		}
+	}
+	ft_putnbr(arg);
+	if (params.flag_minus && params.width >= len)
+	{
+		while (params.width > len)
+		{
+			if (params.flag_zero)
+				ft_putchar('0');
+			else
+				ft_putchar(' ');
+			*count += 1;
+			len++;
+		}
+	}
+}
+
+int		ft_handle(const char **fmt, va_list *ap, int *count)
 {
 	t_params params;
 
@@ -278,15 +419,14 @@ int		ft_handle(const char **fmt, va_list *ap)
 	if (params.type == '0')
 		return(0);
 	if (params.type == 'i' || params.type == 'd')
-		ft_handle_i(params, ap);
-
-/*	else if (params.type == 'c')
-		ft_handle_c(params, &ap);
+		ft_handle_i(params, ap, count);
+	else if (params.type == 'c')
+		ft_handle_c(params, ap, count);
 	else if (params.type == 's')
-		ft_handle_s(params, &ap);
+		ft_handle_s(params, ap, count);
 	else if (params.type == 'p')
-		ft_handle_p(params, &ap);
-	else if (params.type == 'x')
+		ft_handle_p(params, ap, count);
+/*	else if (params.type == 'x')
 		ft_handle_x(params, &ap);
 	else if (params.type == 'X')
 		ft_handle_X(params, &ap);
@@ -307,7 +447,7 @@ int		ft_printf(const char *fmt, ...)
 		if (*fmt == '%')
 		{
 			fmt++;
-			if (!ft_handle(&fmt, &ap))
+			if (!ft_handle(&fmt, &ap, &count))
 				return(-1);
 		}
 		else
@@ -323,12 +463,15 @@ int		ft_printf(const char *fmt, ...)
 
 int		main(void)
 {
-	int a;
-	int b;
+	//int a;
+	//int b;
+	char *str = "abcdefg";
 
-	a = 555;
-	b = 111;
-	printf("a = %-*.4d\n",7, a);
-	ft_printf("b = %-*.4d\n",7, b);
+	//a = 0;
+	//b = 0;
+	int ca = printf("a = %p\n", str);
+	int cb = ft_printf("b = %p\n", str);
+	printf("[%i]", ca);
+	printf("[%i]", cb);
 	return (0);
 }
