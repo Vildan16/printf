@@ -52,7 +52,6 @@ char 	ft_get_type(const char *fmt)
 	char 	result;
 
 	result = '0';
-	printf("\nchar = %c\n", *fmt);
 	if (*fmt == 'i' || *fmt == 'd')
 		result = 'i';
 	else if (*fmt == 'c')
@@ -70,50 +69,50 @@ char 	ft_get_type(const char *fmt)
 	return(result);
 }
 
-void	ft_get_flags(const char *fmt, int *flag_zero, int *flag_minus)
+void	ft_get_flags(const char **fmt, int *flag_zero, int *flag_minus)
 {
 	*flag_zero = 0;
 	*flag_minus = 0;
 
-	while (*fmt == '-' || *fmt == '0')
+	while (**fmt == '-' || **fmt == '0')
 	{
-		if (*fmt == '0')
+		if (**fmt == '0')
 			*flag_zero = 1;
-		if (*fmt == '-')
+		if (**fmt == '-')
 			*flag_minus = 1;
-		fmt++;
+		*fmt += 1;
 	}
 }
 
-int		ft_get_width(const char *fmt, va_list ap)
+int		ft_get_width(const char **fmt, va_list ap)
 {
 	int		result;
 
 	result = -1;
-	if (*fmt >= '0' && *fmt <= '9')
-		result = ft_atoi(fmt);
-	if (*fmt == '*')
+	if (**fmt >= '0' && **fmt <= '9')
+		result = ft_atoi(*fmt);
+	if (**fmt == '*')
 		result = va_arg(ap, int);
-	while ((*fmt >= '0' && *fmt <= '9') || *fmt == '*')
-		fmt++;
+	while ((**fmt >= '0' && **fmt <= '9') || **fmt == '*')
+		*fmt += 1;
 	return(result);
 }
 
-int		ft_get_precision(const char *fmt, va_list ap)
+int		ft_get_precision(const char **fmt, va_list ap)
 {
 	int		result;
 
 	result = -1;
-	if (*fmt == '.')
+	if (**fmt == '.')
 	{
 		result = 0;
-		fmt++;
-		if (*fmt >= '0' && *fmt <= '9')
-			result = ft_atoi(fmt);
-		if (*fmt == '*')
+		*fmt += 1;
+		if (**fmt >= '0' && **fmt <= '9')
+			result = ft_atoi(*fmt);
+		if (**fmt == '*')
 			result = va_arg(ap, int);
-		while ((*fmt >= '0' && *fmt <= '9') || *fmt == '*')
-			fmt++;
+		while ((**fmt >= '0' && **fmt <= '9') || **fmt == '*')
+			*fmt += 1;
 	}
 	return(result);
 }
@@ -123,14 +122,14 @@ void	ft_handle_i(t_params params, va_list ap)
 	ft_putchar('A');
 }
 
-int		ft_handle(const char *fmt, va_list ap)
+int		ft_handle(const char **fmt, va_list ap)
 {
 	t_params params;
 
 	ft_get_flags(fmt, &params.flag_zero, &params.flag_minus);
 	params.width = ft_get_width(fmt, ap);
 	params.precision = ft_get_precision(fmt, ap);
-	params.type = ft_get_type(fmt);
+	params.type = ft_get_type(*fmt);
 	if (params.type == '0')
 		return(0);
 	if (params.type == 'i' || params.type == 'd')
@@ -162,7 +161,8 @@ int		ft_printf(const char *fmt, ...)
 	{
 		if (*fmt == '%')
 		{
-			if (!ft_handle(++fmt, ap))
+			fmt++;
+			if (!ft_handle(&fmt, ap))
 				return(-1);
 		}
 		else
@@ -178,6 +178,6 @@ int		ft_printf(const char *fmt, ...)
 
 int		main(void)
 {
-	ft_printf("abc%0d");
+	ft_printf("d");
 	return (0);
 }
