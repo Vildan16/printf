@@ -222,10 +222,17 @@ void	ft_handle_i(t_params params, va_list *ap)
 {
 	int len;
 	int arg;
+/*
+	printf("\nflag_minus = %i\n", params.flag_minus);
+	printf("flag_zero = %i\n", params.flag_zero);
+	printf("precision = %i\n", params.precision);
+	printf("width = %i\n", params.width);
 
+ */
 	arg = va_arg(*ap, int);
 	len = ft_strlen(ft_itoa(arg));
-	if (params.precision != -1)
+
+	if (params.precision != -1 || params.flag_minus)
 		params.flag_zero = 0;
 	if (!params.flag_minus && params.width >= len)
 	{
@@ -247,6 +254,17 @@ void	ft_handle_i(t_params params, va_list *ap)
 		}
 	}
 	ft_putnbr(arg);
+	if (params.flag_minus && params.width >= len)
+	{
+		while (params.width > len)
+		{
+			if (params.flag_zero)
+				ft_putchar('0');
+			else
+				ft_putchar(' ');
+			len++;
+		}
+	}
 }
 
 int		ft_handle(const char **fmt, va_list *ap)
@@ -310,7 +328,7 @@ int		main(void)
 
 	a = 555;
 	b = 111;
-	printf("a = %-7d\n", a);
-	ft_printf("b = %-7d\n", b);
+	printf("a = %-*.4d\n",7, a);
+	ft_printf("b = %-*.4d\n",7, b);
 	return (0);
 }
