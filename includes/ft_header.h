@@ -27,7 +27,7 @@ void	ft_handle_i(t_params params, va_list *ap, int *count);
 void	ft_handle_p(t_params params, va_list *ap, int *count);
 void	ft_handle_percent(int *count);
 void	ft_handle_s(t_params params, va_list *ap, int *count);
-void	ft_handle_xX(t_params params, va_list *ap, int *count);
+void	ft_handle_x(t_params params, va_list *ap, int *count);
 char	*ft_itoa_hex(unsigned long long value);
 int		ft_printf(const char *fmt, ...);
 void	ft_putchar(char c);

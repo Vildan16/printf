@@ -4,7 +4,7 @@
 
 #include "ft_header.h"
 
-void	ft_handle_i(t_params params, va_list *ap, int *count)
+void	ft_handle_i(t_params params, va_list *ap, int *count) //fixme 43 lines
 {
 	int len;
 	int arg;

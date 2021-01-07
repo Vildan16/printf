@@ -4,11 +4,11 @@
 
 #include "ft_header.h"
 
-void	ft_handle_s(t_params params, va_list *ap, int *count)
+void	ft_handle_s(t_params params, va_list *ap, int *count) //fixme 40 lines
 {
 	int		len;
 	char	*arg;
-	int 	i;
+	int		i;
 
 	i = 0;
 	arg = va_arg(*ap, char*);

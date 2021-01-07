@@ -15,5 +15,5 @@ int		ft_get_width(const char **fmt, va_list *ap)
 		result = va_arg(*ap, int);
 	while ((**fmt >= '0' && **fmt <= '9') || **fmt == '*')
 		*fmt += 1;
-	return(result);
+	return (result);
 }

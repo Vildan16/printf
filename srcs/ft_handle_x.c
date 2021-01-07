@@ -4,11 +4,11 @@
 
 #include "ft_header.h"
 
-void	ft_handle_xX(t_params params, va_list *ap, int *count)
+void	ft_handle_x(t_params params, va_list *ap, int *count) //fixme 48 lines
 {
 	int				len;
 	unsigned int	arg;
-	char 			*str;
+	char			*str;
 
 	arg = va_arg(*ap, unsigned int);
 	str = ft_itoa_hex(arg);

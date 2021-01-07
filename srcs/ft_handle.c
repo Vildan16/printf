@@ -13,7 +13,7 @@ int		ft_handle(const char **fmt, va_list *ap, int *count)
 	params.precision = ft_get_precision(fmt, ap);
 	params.type = ft_get_type(*fmt);
 	if (params.type == '0')
-		return(0);
+		return (0);
 	if (params.type == 'i' || params.type == 'd')
 		ft_handle_i(params, ap, count);
 	else if (params.type == 'c')
@@ -23,7 +23,7 @@ int		ft_handle(const char **fmt, va_list *ap, int *count)
 	else if (params.type == 'p')
 		ft_handle_p(params, ap, count);
 	else if (params.type == 'x' || params.type == 'X')
-		ft_handle_xX(params, ap, count);
+		ft_handle_x(params, ap, count);
 	else if (params.type == '%')
 		ft_handle_percent(count);
 	return (1);

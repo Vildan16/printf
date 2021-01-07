@@ -17,9 +17,9 @@ int		ft_get_precision(const char **fmt, va_list *ap)
 		else if (**fmt == '*')
 			result = va_arg(*ap, int);
 		else
-		result = -1;
+			result = -1;
 		while ((**fmt >= '0' && **fmt <= '9') || **fmt == '*' || **fmt == '-')
 			*fmt += 1;
 	}
-	return(result);
+	return (result);
 }

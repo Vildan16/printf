@@ -4,9 +4,9 @@
 
 #include "ft_header.h"
 
-char 	ft_get_type(const char *fmt)
+char	ft_get_type(const char *fmt)
 {
-	char 	result;
+	char	result;
 
 	result = '0';
 	if (*fmt == 'i' || *fmt == 'd')
@@ -23,5 +23,5 @@ char 	ft_get_type(const char *fmt)
 		result = 'X';
 	else if (*fmt == '%')
 		result = '%';
-	return(result);
+	return (result);
 }
