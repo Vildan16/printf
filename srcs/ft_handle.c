@@ -25,6 +25,6 @@ int		ft_handle(const char **fmt, va_list *ap, int *count)
 	else if (params.type == 'x' || params.type == 'X')
 		ft_handle_xX(params, ap, count);
 	else if (params.type == '%')
-		ft_handle_percent(params, count);
+		ft_handle_percent(count);
 	return (1);
 }

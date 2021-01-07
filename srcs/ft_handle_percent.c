@@ -4,7 +4,7 @@
 
 #include "ft_header.h"
 
-void	ft_handle_percent(t_params params, int *count)
+void	ft_handle_percent(int *count)
 {
 	int len;
 

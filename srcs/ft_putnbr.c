@@ -4,7 +4,7 @@
 
 #include "ft_header.h"
 
-static void		ft_putnbr(int n)  //LIBFT - mod
+void		ft_putnbr(int n)
 {
 	int		i;
 	char	a[15];
