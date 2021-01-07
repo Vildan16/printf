@@ -11,7 +11,7 @@ OBJ =	ft_get_flags.o \
 		ft_handle_p.o \
 		ft_handle_percent.o \
 		ft_handle_s.o \
-		ft_handle_xX.o \
+		ft_handle_x.o \
 		ft_itoa_hex.o \
 		ft_print_width.o \
 		ft_printf.o \

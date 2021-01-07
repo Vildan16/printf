@@ -4,12 +4,12 @@
 
 #include "ft_header.h"
 
-void	ft_print_width(t_params params, int *len, int *count)
+void	ft_print_width(t_params params, int *len, int *count, int a)
 {
-	if (!params.flag_minus && params.width >= len && \
-	params.width > params.precision)
+	if (!params.flag_minus && params.width >= *len && \
+	params.width > params.precision && a == 1)
 	{
-		while (params.width > len)
+		while (params.width > *len)
 		{
 			if (params.flag_zero)
 				ft_putchar('0');
@@ -18,17 +18,18 @@ void	ft_print_width(t_params params, int *len, int *count)
 			*count += 1;
 			(*len)++;
 		}
+		a = 1;
 	}
-	if (params.flag_minus && params.width >= len)
+	if (a == 2)
 	{
-		while (params.width > len)
+		while (params.width > *len)
 		{
 			if (params.flag_zero)
 				ft_putchar('0');
 			else
 				ft_putchar(' ');
 			*count += 1;
-			len++;
+			(*len)++;
 		}
 	}
 }

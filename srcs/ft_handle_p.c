@@ -14,7 +14,7 @@ void	ft_handle_p(t_params params, va_list *ap, int *count)
 	str = ft_itoa_hex(arg);
 	len = (int)ft_strlen(str) + 2;
 	*count = *count + len;
-	ft_print_width(params, &len, count);
+	ft_print_width(params, &len, count, 1);
 	ft_putstr("0x");
 	ft_putstr(ft_strtolower(str));
 	if (params.flag_minus && params.width >= len)

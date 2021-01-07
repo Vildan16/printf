@@ -12,7 +12,7 @@ void	ft_handle_c(t_params params, va_list *ap, int *count)
 	arg = va_arg(*ap, int);
 	len = 1;
 	*count += len;
-	ft_print_width(params, &len, count);
+	ft_print_width(params, &len, count, 1);
 	if (params.precision != -1)
 	{
 		while (params.precision > len)
@@ -23,5 +23,5 @@ void	ft_handle_c(t_params params, va_list *ap, int *count)
 		}
 	}
 	ft_putchar((char)arg);
-	ft_print_width(params, &len, count);
+	ft_print_width(params, &len, count, 2);
 }
