@@ -7,4 +7,13 @@
 
 # include <stdarg.h>
 
+typedef struct		s_params
+{
+	int				flag_zero;
+	int				flag_minus;
+	int				width;
+	int 			precision;
+	char 			type;
+}					t_params;
+
 #endif
