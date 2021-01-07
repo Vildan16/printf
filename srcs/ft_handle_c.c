@@ -4,7 +4,7 @@
 
 #include "ft_header.h"
 
-void	ft_handle_c(t_params params, va_list *ap, int *count) //fixme 34 lines
+void	ft_handle_c(t_params params, va_list *ap, int *count)
 {
 	int arg;
 	int len;
@@ -12,15 +12,7 @@ void	ft_handle_c(t_params params, va_list *ap, int *count) //fixme 34 lines
 	arg = va_arg(*ap, int);
 	len = 1;
 	*count += len;
-	if (!params.flag_minus && params.width >= len)
-	{
-		while (params.width > len)
-		{
-			ft_putchar(' ');
-			*count += 1;
-			len++;
-		}
-	}
+	ft_print_width(params, &len, count);
 	if (params.precision != -1)
 	{
 		while (params.precision > len)
@@ -31,13 +23,5 @@ void	ft_handle_c(t_params params, va_list *ap, int *count) //fixme 34 lines
 		}
 	}
 	ft_putchar((char)arg);
-	if (params.flag_minus && params.width >= len)
-	{
-		while (params.width > len)
-		{
-			ft_putchar(' ');
-			*count += 1;
-			len++;
-		}
-	}
+	ft_print_width(params, &len, count);
 }

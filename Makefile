@@ -13,6 +13,7 @@ OBJ =	ft_get_flags.o \
 		ft_handle_s.o \
 		ft_handle_xX.o \
 		ft_itoa_hex.o \
+		ft_print_width.o \
 		ft_printf.o \
 		ft_putchar.o \
 		ft_putnbr.o \
