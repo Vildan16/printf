@@ -15,12 +15,12 @@ int		ft_handle(const char **fmt, va_list *ap, int *count)
 	if (params.type == '0')
 		return (0);
 	if (params.type == 'i' || params.type == 'd')
-		ft_handle_i(params, ap, count);
+		ft_handle_i(&params, ap, count);
 	else if (params.type == 'c')
-		return (ft_handle_c(params, ap, count));
+		ft_handle_c(&params, ap, count);
 	else if (params.type == 's')
-		return (ft_handle_s(params, ap, count));
-	else if (params.type == 'p')
+		ft_handle_s(&params, ap, count);
+/*	else if (params.type == 'p')
 		return (ft_handle_p(params, ap, count));
 	else if (params.type == 'u')
 		ft_handle_u(params, ap, count);
@@ -28,5 +28,5 @@ int		ft_handle(const char **fmt, va_list *ap, int *count)
 		ft_handle_x(params, ap, count);
 	else if (params.type == '%')
 		ft_handle_percent(count);
-	return (1);
+*/	return (1);
 }

@@ -34,11 +34,6 @@ char		*ft_itoa_u(unsigned int n)
 	if (n == 0)
 		str[nn - 1] = '0';
 	str[nn] = '\0';
-	if (n < 0)
-	{
-		str[0] = '-';
-		n = -1 * n;
-	}
 	while (n != 0)
 	{
 		str[nn - 1] = n % 10 + '0';

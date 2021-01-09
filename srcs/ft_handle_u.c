@@ -20,13 +20,6 @@ void	ft_handle_u(t_params params, va_list *ap, int *count)
 	*count += len;
 	if (params.precision != -1 || params.flag_minus)
 		params.flag_zero = 0;
-	if (arg < 0 && (params.flag_minus || params.flag_zero || \
-	params.precision > (int)ft_strlen(ft_itoa(arg))))
-	{
-		ft_putchar('-');
-		arg *= -1;
-		*count += 1;
-	}
 	if (!params.flag_minus && params.width >= len)
 	{
 		while (params.width > len)

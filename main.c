@@ -7,9 +7,10 @@
 
 int 	main(void)
 {
+	int a = -123;
 
-	int ac = printf("%5%\n");
-	int bc = ft_printf("%5%\n");
+	int ac = printf("%.10i\n", a);
+	int bc = ft_printf("%-.10i\n", a);
 	printf("[%i][%i]\n", ac, bc);
 	return (0);
 }

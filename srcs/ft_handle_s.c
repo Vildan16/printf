@@ -4,49 +4,70 @@
 
 #include "ft_header.h"
 
-int		ft_handle_s(t_params params, va_list *ap, int *count)
+static void	ft_prints_min(t_params *params, va_list *ap, int *count)
 {
+	char	*string;
 	int		len;
-	char	*arg;
 	int		i;
 
-	if (params.flag_zero)
-		return (0);
 	i = 0;
-	arg = va_arg(*ap, char*);
-	if ((int)ft_strlen(arg) <= params.precision || params.precision == -1)
-		len = ft_strlen(arg);
-	else
-		len = params.precision;
-	*count += len;
-	if (!params.flag_minus && params.width >= len)
+	string = va_arg(*ap, char*);
+	len = (!string) ? 6 : ft_strlen(string);
+	len = (params->precision == -1 || len < params->precision) ?
+			len : params->precision;
+	if (!string)
 	{
-		while (params.width > len)
-		{
-			ft_putchar(' ');
-			*count += 1;
-			params.width--;
-		}
-	}
-	if (params.precision != -1)
-	{
-		while (i < len)
-		{
-			ft_putchar(*arg);
-			i++;
-			arg++;
-		}
+		ft_putstr("(null)");
+		*count += 6;
 	}
 	else
-		ft_putstr(arg);
-	if (params.flag_minus)
 	{
-		while (params.width > len)
-		{
-			ft_putchar(' ');
-			*count += 1;
-			params.width--;
-		}
+		ft_putstr(string);
+		*count += ft_strlen(string);
 	}
-	return (1);
+	while (i < (params->width - len))
+	{
+		ft_putchar(' ');
+		*count += 1;
+		i++;
+	}
+}
+
+static void	ft_prints_nomin(t_params *params, va_list *ap, int *count)
+{
+	char	*string;
+	int		len;
+	int		i;
+
+	i = 0;
+	string = va_arg(*ap, char*);
+	len = (!string) ? 6 : ft_strlen(string);
+	len = (params->precision == -1 || len < params->precision) ?
+			len : params->precision;
+	while (i < (params->width - len))
+	{
+		ft_putchar(' ');
+		*count += 1;
+		i++;
+	}
+	if (!string)
+	{
+		ft_putstr("(null)");
+		*count += 6;
+	}
+	else
+	{
+		ft_putstr(string);
+		*count += ft_strlen(string);
+	}
+}
+
+void	ft_handle_s(t_params *params, va_list *ap, int *count)
+{
+	if (params->precision == 0 && params->width == 0)
+	return ;
+	if (params->flag_minus == 1)
+		ft_prints_min(params, ap, count);
+	else
+		ft_prints_nomin(params, ap, count);
 }

@@ -4,34 +4,44 @@
 
 #include "ft_header.h"
 
-int		ft_handle_c(t_params params, va_list *ap, int *count)
+static void	ft_printc_min(t_params *params, va_list *ap, int *count)
 {
-	int arg;
-	int len;
+	int chr;
+	int i;
 
-	if (params.precision != -1 || params.flag_minus)
-		return (0);
-	arg = va_arg(*ap, int);
-	len = 1;
-	*count += len;
-	if (!params.flag_minus && params.width >= len)
+	i = 0;
+	chr = va_arg(*ap, int);
+	ft_putchar((char)chr);
+	*(count) += 1;
+	while (i < (params->width - 1))
 	{
-		while (params.width > len)
-		{
-			ft_putchar(' ');
-			*count += 1;
-			params.width--;
-		}
+		ft_putchar(' ');
+		*(count) += 1;
+		i++;
 	}
-	ft_putchar((char)arg);
-	if (params.flag_minus)
+}
+
+static void	ft_printc_nomin(t_params *params, va_list *ap, int *count)
+{
+	int chr;
+	int i;
+
+	i = 0;
+	chr = va_arg(*ap, int);
+	while (i < (params->width - 1))
 	{
-		while (params.width > len)
-		{
-			ft_putchar(' ');
-			*count += 1;
-			params.width--;
-		}
+		ft_putchar(' ');
+		*(count) += 1;
+		i++;
 	}
-	return (1);
+	ft_putchar((char)chr);
+	*(count) += 1;
+}
+
+void	ft_handle_c(t_params *params, va_list *ap, int *count)
+{
+	if (params->flag_minus == 1)
+		ft_printc_min(params, ap, count);
+	else
+		ft_printc_nomin(params, ap, count);
 }
