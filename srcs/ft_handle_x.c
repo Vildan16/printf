@@ -12,23 +12,44 @@ void	ft_handle_x(t_params params, va_list *ap, int *count)
 
 	arg = va_arg(*ap, unsigned int);
 	str = ft_itoa_hex(arg);
-	len = (int)ft_strlen(str);
+	if (params.precision <= (int)ft_strlen(str))
+		len = (int)ft_strlen(str);
+	else
+		len = params.precision;
 	*count += len;
-	if (params.precision != -1 || params.flag_minus)
+	if (params.flag_minus)
 		params.flag_zero = 0;
-	ft_print_width(params, &len, count, 1);
-	if (params.precision != -1)
+	if (!params.flag_minus && params.width >= len)
 	{
-		while (params.precision > len)
+		while (params.width > len)
 		{
-			ft_putchar('0');
+			if (params.flag_zero)
+				ft_putchar('0');
+			else
+				ft_putchar(' ');
 			*count += 1;
-			len++;
+			params.width--;
 		}
+	}
+	while (params.precision > (int)ft_strlen(str))
+	{
+		ft_putchar('0');
+		params.precision--;
 	}
 	if (params.type == 'x')
 		ft_putstr(ft_strtolower(str));
 	else
 		ft_putstr(str);
-	ft_print_width(params, &len, count, 2);
+	if (params.flag_minus)
+	{
+		while (params.width > len)
+		{
+			if (params.flag_zero)
+				ft_putchar('0');
+			else
+				ft_putchar(' ');
+			*count += 1;
+			params.width--;
+		}
+	}
 }

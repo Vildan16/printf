@@ -7,7 +7,9 @@
 
 int 	main(void)
 {
-	printf("%-7s%5s\n", "hello", "world");
-	ft_printf("%-7s%5s\n", "hello", "world");
+	int a = -123456;
+	int ac = printf("a%2.2x\n", a);
+	int bc = ft_printf("b%2.2x\n", a);
+	printf("[%i][%i]\n", ac, bc);
 	return (0);
 }

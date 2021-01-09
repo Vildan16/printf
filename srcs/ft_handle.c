@@ -17,11 +17,11 @@ int		ft_handle(const char **fmt, va_list *ap, int *count)
 	if (params.type == 'i' || params.type == 'd')
 		ft_handle_i(params, ap, count);
 	else if (params.type == 'c')
-		ft_handle_c(params, ap, count);
+		return (ft_handle_c(params, ap, count));
 	else if (params.type == 's')
-		ft_handle_s(params, ap, count);
+		return (ft_handle_s(params, ap, count));
 	else if (params.type == 'p')
-		ft_handle_p(params, ap, count);
+		return (ft_handle_p(params, ap, count));
 	else if (params.type == 'x' || params.type == 'X')
 		ft_handle_x(params, ap, count);
 	else if (params.type == '%')

@@ -23,18 +23,18 @@ OBJ =	ft_get_flags.o \
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make -C libft
-	ar rc $(NAME) $(OBJ) libft/*.o
+	@make -C libft
+	@ar rc $(NAME) $(OBJ) libft/*.o
 	ranlib $(NAME)
 
 $(OBJ):
-	gcc -Wall -Wextra -Werror -I includes -c $(addprefix srcs/,$(patsubst %.o, %.c, $@))
+	@gcc -Wall -Wextra -Werror -I includes -c $(addprefix srcs/,$(patsubst %.o, %.c, $@))
 
 clean:
-	rm -f *.o
+	@rm -f *.o
 
 fclean: clean
-	rm -f $(NAME)
-	make fclean -C libft
+	@rm -f $(NAME)
+	@make fclean -C libft
 
 re: fclean all

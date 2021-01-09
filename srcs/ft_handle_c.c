@@ -4,24 +4,34 @@
 
 #include "ft_header.h"
 
-void	ft_handle_c(t_params params, va_list *ap, int *count)
+int		ft_handle_c(t_params params, va_list *ap, int *count)
 {
 	int arg;
 	int len;
 
+	if (params.precision != -1 || params.flag_minus)
+		return (0);
 	arg = va_arg(*ap, int);
 	len = 1;
 	*count += len;
-	ft_print_width(params, &len, count, 1);
-	if (params.precision != -1)
+	if (!params.flag_minus && params.width >= len)
 	{
-		while (params.precision > len)
+		while (params.width > len)
 		{
-			ft_putchar('0');
+			ft_putchar(' ');
 			*count += 1;
-			len++;
+			params.width--;
 		}
 	}
 	ft_putchar((char)arg);
-	ft_print_width(params, &len, count, 2);
+	if (params.flag_minus)
+	{
+		while (params.width > len)
+		{
+			ft_putchar(' ');
+			*count += 1;
+			params.width--;
+		}
+	}
+	return (1);
 }
