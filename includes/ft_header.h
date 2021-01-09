@@ -28,6 +28,8 @@ int 	ft_handle_p(t_params params, va_list *ap, int *count);
 void	ft_handle_percent(int *count);
 int		ft_handle_s(t_params params, va_list *ap, int *count);
 void	ft_handle_x(t_params params, va_list *ap, int *count);
+void	ft_handle_u(t_params params, va_list *ap, int *count);
+char	*ft_itoa_u(unsigned int n);
 char	*ft_itoa_hex(unsigned long long value);
 void	ft_print_width(t_params params, int *len, int *count, int a);
 int		ft_printf(const char *fmt, ...);

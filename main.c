@@ -7,9 +7,9 @@
 
 int 	main(void)
 {
-	int a = -123456;
-	int ac = printf("a%2.2x\n", a);
-	int bc = ft_printf("b%2.2x\n", a);
+
+	int ac = printf("%5%\n");
+	int bc = ft_printf("%5%\n");
 	printf("[%i][%i]\n", ac, bc);
 	return (0);
 }

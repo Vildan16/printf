@@ -22,6 +22,8 @@ int		ft_handle(const char **fmt, va_list *ap, int *count)
 		return (ft_handle_s(params, ap, count));
 	else if (params.type == 'p')
 		return (ft_handle_p(params, ap, count));
+	else if (params.type == 'u')
+		ft_handle_u(params, ap, count);
 	else if (params.type == 'x' || params.type == 'X')
 		ft_handle_x(params, ap, count);
 	else if (params.type == '%')

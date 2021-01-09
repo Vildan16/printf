@@ -23,5 +23,7 @@ char	ft_get_type(const char *fmt)
 		result = 'X';
 	else if (*fmt == '%')
 		result = '%';
+	else if (*fmt == 'u')
+		result = 'u';
 	return (result);
 }
