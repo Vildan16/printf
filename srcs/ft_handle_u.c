@@ -4,50 +4,117 @@
 
 #include "ft_header.h"
 
-void	ft_handle_u(t_params params, va_list *ap, int *count)
+static void	ft_putnbru(long long n)
 {
-	int 			len;
-	unsigned int	arg;
-	char 			*str;
-
-	arg = va_arg(*ap, unsigned int);
-	arg = (unsigned int)(4294967295 + 1 + arg);
-	str = ft_itoa_u(arg);
-	if (params.precision <= (int)ft_strlen(ft_itoa(arg)))
-		len = ft_strlen(str);
-	else
-		len = params.precision;
-	*count += len;
-	if (params.precision != -1 || params.flag_minus)
-		params.flag_zero = 0;
-	if (!params.flag_minus && params.width >= len)
+	if (n < 0)
 	{
-		while (params.width > len)
+		if (n == -2147483648)
 		{
-			if (params.flag_zero)
-				ft_putchar('0');
-			else
-				ft_putchar(' ');
-			*count += 1;
-			params.width--;
+			ft_putchar('2');
+			n = 147483648;
 		}
+		else
+			n = n * -1;
 	}
-	while (params.precision > (int)ft_strlen(ft_itoa(arg)))
+	if (n >= 10)
+	{
+		ft_putnbru(n / 10);
+	}
+	ft_putchar('0' + (n % 10));
+}
+
+static void	ft_printu_min(t_params *params, unsigned int value, int *count)
+{
+	int				len;
+	int				i;
+
+	i = 0;
+	len = ft_strlen(ft_itoa_u(value));
+	while (i < (params->precision - len))
 	{
 		ft_putchar('0');
-		params.precision--;
+		*count += 1;
+		i++;
 	}
-	ft_putstr(str);
-	if (params.flag_minus)
+	ft_putnbru(value);
+	*count += ft_strlen(ft_itoa_u(value));
+	while (i < (params->width - len))
 	{
-		while (params.width > len)
-		{
-			if (params.flag_zero)
-				ft_putchar('0');
-			else
-				ft_putchar(' ');
-			*count += 1;
-			params.width--;
-		}
+		ft_putchar(' ');
+		*count += 1;
+		i++;
 	}
+}
+
+static void	ft_printu_zero(t_params *params, unsigned int value, int *count)
+{
+	int	len;
+	int	i;
+
+	i = 0;
+	len = ft_strlen(ft_itoa_u(value));
+	params->precision = (params->precision < len) ? len :
+							params->precision;
+	while (i < (params->width - params->precision))
+	{
+		if (params->precision == -1)
+			ft_putchar('0');
+		else
+			ft_putchar(' ');
+		*count += 1;
+		i++;
+	}
+	i = len;
+	while (i < (params->precision))
+	{
+		ft_putchar('0');
+		*count += 1;
+		i++;
+	}
+	ft_putnbru(value);
+	*count += ft_strlen(ft_itoa_u(value));
+}
+
+static void	ft_printu_noflags(t_params *params, unsigned int value, int *count)
+{
+	int	len;
+	int	i;
+
+	i = 0;
+	len = ft_strlen(ft_itoa_u(value));
+	params->precision = (params->precision < len) ? len :
+							params->precision;
+	while (i < (params->width - params->precision))
+	{
+		ft_putchar(' ');
+		*count += 1;
+		i++;
+	}
+	i = 0;
+	while (i < (params->precision - len))
+	{
+		ft_putchar('0');
+		*count += 1;
+		i++;
+	}
+	ft_putnbru(value);
+	*count += ft_strlen(ft_itoa_u(value));
+}
+
+void	ft_handle_u(t_params *params, va_list *ap, int *count)
+{
+	unsigned int	value;
+
+	value = va_arg(*ap, unsigned int);
+	if (params->precision == 0 && value == 0)
+	{
+		ft_print_zero(params, count);
+		return ;
+	}
+	if (params->flag_minus)
+		ft_printu_min(params, value, count);
+	else if (params->flag_zero)
+		ft_printu_zero(params, value, count);
+	else
+		ft_printu_noflags(params, value, count);
 }

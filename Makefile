@@ -19,6 +19,7 @@ OBJ =	ft_get_flags.o \
 		ft_printf.o \
 		ft_putchar.o \
 		ft_putnbr.o \
+		ft_print_zero.o \
 		ft_putstr.o \
 		ft_strtolower.o \
 

@@ -21,19 +21,6 @@ static int	ft_integer_len(long long n)
 	return (count);
 }
 
-static void	ft_printi_zero(t_params *params, int *count)
-{
-	int i;
-
-	i = 0;
-	while (i < params->width)
-	{
-		ft_putchar(' ');
-		*count += 1;
-		i++;
-	}
-}
-
 static void	ft_printi_min(t_params *params, int value, int sign, int *count)
 {
 	int len;
@@ -138,7 +125,7 @@ void	ft_handle_i(t_params *params, va_list *ap, int *count)
 	value = va_arg(*ap, int);
 	if (params->precision == 0 && value == 0)
 	{
-		ft_printi_zero(params, count);
+		ft_print_zero(params, count);
 		return ;
 	}
 	if (value < 0)

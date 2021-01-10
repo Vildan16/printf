@@ -4,37 +4,66 @@
 
 #include "ft_header.h"
 
-int 	ft_handle_p(t_params params, va_list *ap, int *count)
+static void	ft_printp_min(t_params *params, va_list *ap, int *count)
 {
-	int						len;
-	unsigned long long int	arg;
-	char					*str;
+	void	*value;
+	int		len;
+	int		i;
 
-	if (params.flag_zero || params.precision != -1)
-		return (0);
-	arg = va_arg(*ap, unsigned long long int);
-	str = ft_itoa_hex(arg);
-	len = (int)ft_strlen(str) + 2;
-	*count = *count + len;
-	if (!params.flag_minus && params.width >= len)
+	i = 0;
+	value = va_arg(*ap, void*);
+	len = (params->precision != 0) ? 2 :
+			ft_strlen(ft_itoa_hex((unsigned long long)value)) + 2;
+	len = (params->precision != -1 && value == 0) ? 2 :
+			ft_strlen(ft_itoa_hex((unsigned long long)value)) + 2;
+	ft_putstr("0x");
+	*count += 2;
+	if (params->precision != 1)
 	{
-		while (params.width > len)
-		{
-			ft_putchar(' ');
-			*count += 1;
-			params.width--;
-		}
+		ft_putstr(ft_strtolower(ft_itoa_hex((unsigned long long)value)));
+		*count += ft_strlen(ft_itoa_hex((unsigned long long)value));
+	}
+	while (i < (params->width - len))
+	{
+		ft_putchar(' ');
+		*count += 1;
+		i++;
+	}
+}
+
+static void	ft_printp_nomin(t_params *params, va_list *ap, int *count)
+{
+	void	*value;
+	int		len;
+	int		i;
+
+	i = 0;
+	value = va_arg(*ap, void*);
+	len = (params->precision != 0) ? 2 :
+			ft_strlen(ft_itoa_hex((unsigned long long)value)) + 2;
+	len = (params->precision != -1 && value == 0) ? 2 :
+			ft_strlen(ft_itoa_hex((unsigned long long)value)) + 2;
+	while (i < (params->width - len))
+	{
+		ft_putchar(' ');
+		*count += 1;
+		i++;
 	}
 	ft_putstr("0x");
-	ft_putstr(ft_strtolower(str));
-	if (params.flag_minus && params.width >= len)
+	*count += 2;
+	if ((params->precision > 0) || (params->precision != 1 && value == 0))
+		return ;
+	else
 	{
-		while (params.width > len)
-		{
-			ft_putchar(' ');
-			*count += 1;
-			len++;
-		}
+		ft_putstr(ft_strtolower(ft_itoa_hex((unsigned long long)value)));
+		*count += ft_strlen(ft_itoa_hex((unsigned long long)value));
 	}
-	return (1);
+}
+
+void	ft_handle_p(t_params *params, va_list *ap, int *count)
+{
+	if (params->flag_minus)
+		ft_printp_min(params, ap, count);
+	else
+		ft_printp_nomin(params, ap, count);
 }
