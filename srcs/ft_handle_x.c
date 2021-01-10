@@ -26,9 +26,9 @@ static void	ft_printx_min(t_params *params, unsigned int value, int *count)
 		i++;
 	}
 	if (params->type == 'x')
-		ft_putstr(ft_strtolower(ft_itoa_hex(value)));
+		ft_putstr(ft_itoa_hex(value), 10000);
 	else
-		ft_putstr(ft_itoa_hex(value));
+		ft_putstr(ft_strtoupper(ft_itoa_hex(value)), 10000);
 	*count += ft_strlen(ft_itoa_hex(value));
 	while (i < (params->width - len))
 	{
@@ -57,16 +57,16 @@ static void	ft_printx_zero(t_params *params, unsigned int value, int *count)
 		i++;
 	}
 	i = len;
-	while (i < (params->precision - len))
+	while (i < (params->precision))
 	{
 		ft_putchar('0');
 		*count += 1;
 		i++;
 	}
 	if (params->type == 'x')
-		ft_putstr(ft_strtolower(ft_itoa_hex(value)));
+		ft_putstr(ft_itoa_hex(value), 1000);
 	else
-		ft_putstr(ft_itoa_hex(value));
+		ft_putstr(ft_strtoupper(ft_itoa_hex(value)), 1000);
 	*count += ft_strlen(ft_itoa_hex(value));
 }
 
@@ -93,9 +93,9 @@ static void	ft_printx_noflags(t_params *params, unsigned int value, int *count)
 		i++;
 	}
 	if (params->type == 'x')
-		ft_putstr(ft_strtolower(ft_itoa_hex(value)));
+		ft_putstr(ft_itoa_hex(value), 1000);
 	else
-		ft_putstr(ft_itoa_hex(value));
+		ft_putstr(ft_strtoupper(ft_itoa_hex(value)), 1000);
 	*count += ft_strlen(ft_itoa_hex(value));
 }
 

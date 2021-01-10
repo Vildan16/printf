@@ -22,13 +22,11 @@ void		ft_putnbr(int n)
 		ft_putchar('0');
 	if (n == -2147483648)
 	{
-		ft_putchar('-');
 		ft_putchar('2');
 		n = 147483648;
 	}
 	if (n < 0)
 	{
-		ft_putchar('-');
 		n = -1 * n;
 	}
 	while (n != 0)

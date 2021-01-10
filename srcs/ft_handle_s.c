@@ -25,13 +25,13 @@ static void	ft_prints_min(t_params *params, va_list *ap, int *count)
 			len : params->precision;
 	if (!string)
 	{
-		ft_putstr("(null)");
+		ft_putstr("(null)", len);
 		*count += 6;
 	}
 	else
 	{
-		ft_putstr(string);
-		*count += ft_strlen(string);
+		ft_putstr(string, len);
+		*count += len;
 	}
 	while (i < (params->width - len))
 	{
@@ -60,13 +60,13 @@ static void	ft_prints_nomin(t_params *params, va_list *ap, int *count)
 	}
 	if (!string)
 	{
-		ft_putstr("(null)");
+		ft_putstr("(null)", len);
 		*count += 6;
 	}
 	else
 	{
-		ft_putstr(string);
-		*count += ft_strlen(string);
+		ft_putstr(string, len);
+		*count += len;
 	}
 }
 

@@ -12,7 +12,7 @@
 
 #include "ft_header.h"
 
-static int	ft_nn(unsigned long long value)
+static int	ft_nn(unsigned long value)
 {
 	int	number;
 
@@ -25,7 +25,7 @@ static int	ft_nn(unsigned long long value)
 	return (number);
 }
 
-char		*ft_itoa_hex(unsigned long long value)
+char		*ft_itoa_hex(unsigned long value)
 {
 	unsigned int	division;
 	char			*hex;
@@ -47,6 +47,6 @@ char		*ft_itoa_hex(unsigned long long value)
 		number++;
 		value = value / 16;
 	}
-	hex[nn - number - 1] = '\0';
+	hex[nn] = '\0';
 	return (hex);
 }

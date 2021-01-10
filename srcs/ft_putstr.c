@@ -12,14 +12,14 @@
 
 #include "ft_header.h"
 
-void	ft_putstr(char *s)
+void	ft_putstr(char *s, int size)
 {
-	size_t	i;
+	int	i;
 
 	if (!s)
 		return ;
 	i = 0;
-	while (s[i])
+	while (s[i] && i < size)
 	{
 		ft_putchar(s[i]);
 		i++;

@@ -7,10 +7,10 @@
 
 int 	main(void)
 {
-	//int a = 245678;
+	char *a = "abcdegfhf";
 
-	int ac = printf("A:%05%\n");
-	int bc = ft_printf("B:%05%\n");
+	int ac = printf("%-p\n", a);
+	int bc = ft_printf("%-p\n", a);
 	printf("[%i][%i]\n", ac, bc);
 	return (0);
 }

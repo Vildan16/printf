@@ -17,12 +17,14 @@ void	ft_get_precision(const char **fmt, va_list *ap, int *precision, int *isprec
 	*precision = 0;
 	*isprecision = 0;
 	if (**fmt == '.')
+	{
 		*isprecision = 1;
-	*fmt += 1;
-	if (**fmt >= '0' && **fmt <= '9')
-		*precision = ft_atoi(*fmt);
-	else if (**fmt == '*')
-		*precision = va_arg(*ap, int);
-	while ((**fmt >= '0' && **fmt <= '9') || **fmt == '*' || **fmt == '-')
 		*fmt += 1;
+		if (**fmt >= '0' && **fmt <= '9')
+			*precision = ft_atoi(*fmt);
+		else if (**fmt == '*')
+			*precision = va_arg(*ap, int);
+		while ((**fmt >= '0' && **fmt <= '9') || **fmt == '*' || **fmt == '-')
+			*fmt += 1;
+	}
 }

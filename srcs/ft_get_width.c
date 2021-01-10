@@ -16,7 +16,7 @@ int		ft_get_width(const char **fmt, va_list *ap)
 {
 	int		result;
 
-	result = -1;
+	result = 0;
 	if (**fmt >= '0' && **fmt <= '9')
 		result = ft_atoi(*fmt);
 	if (**fmt == '*')

@@ -20,7 +20,7 @@ OBJ =	ft_get_flags.o \
 		ft_putnbr.o \
 		ft_print_zero.o \
 		ft_putstr.o \
-		ft_strtolower.o \
+		ft_strtoupper.o \
 
 all: $(NAME)
 

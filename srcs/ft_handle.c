@@ -18,8 +18,13 @@ int		ft_handle(const char **fmt, va_list *ap, int *count)
 
 	ft_get_flags(fmt, &params.flag_zero, &params.flag_minus);
 	params.width = ft_get_width(fmt, ap);
-	ft_get_precision(fmt, ap, &params.isprecision, &params.precision);
+	ft_get_precision(fmt, ap, &params.precision, &params.isprecision);
 	params.type = ft_get_type(*fmt);
+	params.isprecision = (params.precision < 0) ? 0 : params.isprecision;
+	params.precision = (params.precision < 0) ? 0 :
+							params.precision;
+	params.flag_minus = (params.width < 0) ? 1 : params.flag_minus;
+	params.width = params.width < 0 ? (-1 * params.width) : params.width;
 	if (params.type == '0')
 		return (0);
 	if (params.type == 'i' || params.type == 'd')
