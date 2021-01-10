@@ -42,7 +42,7 @@ static void	ft_printperc_zero(t_params *params, int *count)
 							params->precision;
 	while (i < (params->width - params->precision))
 	{
-		if (params->precision == -1)
+		if (params->isprecision == 0)
 			ft_putchar('0');
 		else
 			ft_putchar(' ');

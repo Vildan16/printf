@@ -65,7 +65,7 @@ static void	ft_printu_zero(t_params *params, unsigned int value, int *count)
 							params->precision;
 	while (i < (params->width - params->precision))
 	{
-		if (params->precision == -1)
+		if (params->isprecision == 0)
 			ft_putchar('0');
 		else
 			ft_putchar(' ');
@@ -114,7 +114,7 @@ void		ft_handle_u(t_params *params, va_list *ap, int *count)
 	unsigned int	value;
 
 	value = va_arg(*ap, unsigned int);
-	if (params->precision == 0 && value == 0)
+	if (params->isprecision && params->precision == 0 && value == 0)
 	{
 		ft_print_zero(params, count);
 		return ;

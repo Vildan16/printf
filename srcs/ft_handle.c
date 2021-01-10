@@ -18,7 +18,7 @@ int		ft_handle(const char **fmt, va_list *ap, int *count)
 
 	ft_get_flags(fmt, &params.flag_zero, &params.flag_minus);
 	params.width = ft_get_width(fmt, ap);
-	params.precision = ft_get_precision(fmt, ap);
+	ft_get_precision(fmt, ap, &params.isprecision, &params.precision);
 	params.type = ft_get_type(*fmt);
 	if (params.type == '0')
 		return (0);

@@ -71,7 +71,7 @@ static void	ft_prizero(t_params *params, int value, int sign, int *count)
 	params->precision = (params->precision < len) ? len : params->precision;
 	while (i < (params->width - params->precision))
 	{
-		if (params->precision == -1)
+		if (params->isprecision == 0)
 			ft_putchar('0');
 		else
 			ft_putchar(' ');
@@ -134,7 +134,7 @@ void		ft_handle_i(t_params *params, va_list *ap, int *count)
 
 	sign = 0;
 	value = va_arg(*ap, int);
-	if (params->precision == 0 && value == 0)
+	if (params->isprecision == 1 && params->precision == 0 && value == 0)
 	{
 		ft_print_zero(params, count);
 		return ;
@@ -144,7 +144,7 @@ void		ft_handle_i(t_params *params, va_list *ap, int *count)
 		value = value * -1;
 		sign = 1;
 		if (((params->width < ft_integer_len(value)) && params->precision == 0)
-			|| (params->flag_zero && params->precision == -1))
+			|| (params->flag_zero && params->isprecision == 0))
 		{
 			ft_putchar('-');
 			*count += 1;

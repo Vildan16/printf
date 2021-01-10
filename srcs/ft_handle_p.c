@@ -20,9 +20,9 @@ static void	ft_printp_min(t_params *params, va_list *ap, int *count)
 
 	i = 0;
 	value = va_arg(*ap, void*);
-	len = (params->precision != 0) ? 2 :
+	len = (params->isprecision == 1 && params->precision != 0) ? 2 :
 			ft_strlen(ft_itoa_hex((unsigned long long)value)) + 2;
-	len = (params->precision != -1 && value == 0) ? 2 :
+	len = (params->isprecision == 1 && value == 0) ? 2 :
 			ft_strlen(ft_itoa_hex((unsigned long long)value)) + 2;
 	ft_putstr("0x");
 	*count += 2;
@@ -47,9 +47,9 @@ static void	ft_printp_nomin(t_params *params, va_list *ap, int *count)
 
 	i = 0;
 	value = va_arg(*ap, void*);
-	len = (params->precision != 0) ? 2 :
+	len = (params->isprecision == 1 && params->precision != 0) ? 2 :
 			ft_strlen(ft_itoa_hex((unsigned long long)value)) + 2;
-	len = (params->precision != -1 && value == 0) ? 2 :
+	len = (params->isprecision == 1 && value == 0) ? 2 :
 			ft_strlen(ft_itoa_hex((unsigned long long)value)) + 2;
 	while (i < (params->width - len))
 	{
@@ -59,7 +59,8 @@ static void	ft_printp_nomin(t_params *params, va_list *ap, int *count)
 	}
 	ft_putstr("0x");
 	*count += 2;
-	if ((params->precision > 0) || (params->precision != 1 && value == 0))
+	if ((params->isprecision == 1 && params->precision != 0) || \
+	(params->isprecision == 1 && value == 0))
 		return ;
 	else
 	{

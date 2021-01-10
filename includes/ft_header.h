@@ -14,11 +14,12 @@ typedef struct		s_params
 	int				flag_minus;
 	int				width;
 	int 			precision;
+	int				isprecision;
 	char 			type;
 }					t_params;
 
 void	ft_get_flags(const char **fmt, int *flag_zero, int *flag_minus);
-int		ft_get_precision(const char **fmt, va_list *ap);
+void	ft_get_precision(const char **fmt, va_list *ap, int *precision, int *isprecision);
 char 	ft_get_type(const char *fmt);
 int		ft_get_width(const char **fmt, va_list *ap);
 int		ft_handle(const char **fmt, va_list *ap, int *count);
