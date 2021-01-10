@@ -1,6 +1,14 @@
-//
-// Created by ameta on 07.01.2021.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_handle_percent.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ameta <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/10 15:14:06 by ameta             #+#    #+#             */
+/*   Updated: 2021/01/10 15:20:05 by ameta            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_header.h"
 
@@ -73,7 +81,7 @@ static void	ft_printperc_noflags(t_params *params, int *count)
 	*count += 1;
 }
 
-void	ft_handle_percent(t_params *params, int *count)
+void		ft_handle_percent(t_params *params, int *count)
 {
 	if (params->flag_minus)
 		ft_printperc_min(params, count);

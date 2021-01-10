@@ -1,6 +1,14 @@
-//
-// Created by ameta on 07.01.2021.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_handle_x.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ameta <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/10 15:14:29 by ameta             #+#    #+#             */
+/*   Updated: 2021/01/10 15:20:53 by ameta            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_header.h"
 
@@ -91,7 +99,7 @@ static void	ft_printx_noflags(t_params *params, unsigned int value, int *count)
 	*count += ft_strlen(ft_itoa_hex(value));
 }
 
-void	ft_handle_x(t_params *params, va_list *ap, int *count)
+void		ft_handle_x(t_params *params, va_list *ap, int *count)
 {
 	unsigned int	value;
 

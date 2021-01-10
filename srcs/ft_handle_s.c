@@ -1,6 +1,14 @@
-//
-// Created by ameta on 07.01.2021.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_handle_s.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ameta <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/10 15:14:14 by ameta             #+#    #+#             */
+/*   Updated: 2021/01/10 15:17:45 by ameta            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_header.h"
 
@@ -62,10 +70,10 @@ static void	ft_prints_nomin(t_params *params, va_list *ap, int *count)
 	}
 }
 
-void	ft_handle_s(t_params *params, va_list *ap, int *count)
+void		ft_handle_s(t_params *params, va_list *ap, int *count)
 {
 	if (params->precision == 0 && params->width == 0)
-	return ;
+		return ;
 	if (params->flag_minus == 1)
 		ft_prints_min(params, ap, count);
 	else

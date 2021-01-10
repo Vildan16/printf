@@ -1,6 +1,14 @@
-//
-// Created by ameta on 07.01.2021.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_handle_i.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ameta <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/10 15:13:47 by ameta             #+#    #+#             */
+/*   Updated: 2021/01/10 15:26:31 by ameta            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_header.h"
 
@@ -27,7 +35,8 @@ static void	ft_printi_min(t_params *params, int value, int sign, int *count)
 	int i;
 
 	i = 0;
-	len = (value != -2147483648) ? ft_integer_len(value) : ft_integer_len(value) - 1;
+	len = (value != -2147483648) ? ft_integer_len(value)
+		: ft_integer_len(value) - 1;
 	params->width = (sign) ? params->width - 1 : params->width;
 	if (sign == 1)
 	{
@@ -50,13 +59,14 @@ static void	ft_printi_min(t_params *params, int value, int sign, int *count)
 	}
 }
 
-static void	ft_printi_flagzero(t_params *params, int value, int sign, int *count)
+static void	ft_prizero(t_params *params, int value, int sign, int *count)
 {
 	int len;
 	int i;
 
 	i = 0;
-	len = (value != -2147483648) ? ft_integer_len(value) : ft_integer_len(value) - 1;
+	len = (value != -2147483648) ? ft_integer_len(value)
+		: ft_integer_len(value) - 1;
 	params->width = (sign) ? params->width - 1 : params->width;
 	params->precision = (params->precision < len) ? len : params->precision;
 	while (i < (params->width - params->precision))
@@ -91,7 +101,8 @@ static void	ft_printi_noflags(t_params *params, int value, int sign, int *count)
 	int i;
 
 	i = 0;
-	len = (value != -2147483648) ? ft_integer_len(value) : ft_integer_len(value) - 1;
+	len = (value != -2147483648) ? ft_integer_len(value)
+		: ft_integer_len(value) - 1;
 	reset = (params->precision > len) ? params->precision - len : 0;
 	params->width = (sign) ? params->width - 1 : params->width;
 	while (i < (params->width - len - reset))
@@ -116,7 +127,7 @@ static void	ft_printi_noflags(t_params *params, int value, int sign, int *count)
 	*count += ft_integer_len(value);
 }
 
-void	ft_handle_i(t_params *params, va_list *ap, int *count)
+void		ft_handle_i(t_params *params, va_list *ap, int *count)
 {
 	int value;
 	int sign;
@@ -134,16 +145,16 @@ void	ft_handle_i(t_params *params, va_list *ap, int *count)
 		sign = 1;
 		if (((params->width < ft_integer_len(value)) && params->precision == 0)
 			|| (params->flag_zero && params->precision == -1))
-			{
-				ft_putchar('-');
-				*count += 1;
-				sign = 2;
-			};
+		{
+			ft_putchar('-');
+			*count += 1;
+			sign = 2;
+		}
 	}
 	if (params->flag_minus)
 		ft_printi_min(params, value, sign, count);
 	else if (params->flag_zero)
-		ft_printi_flagzero(params, value, sign, count);
+		ft_prizero(params, value, sign, count);
 	else
 		ft_printi_noflags(params, value, sign, count);
 }

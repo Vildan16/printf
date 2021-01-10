@@ -1,6 +1,14 @@
-//
-// Created by Anneliese Meta on 1/9/21.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_handle_u.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ameta <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/10 15:14:22 by ameta             #+#    #+#             */
+/*   Updated: 2021/01/10 15:21:13 by ameta            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_header.h"
 
@@ -101,7 +109,7 @@ static void	ft_printu_noflags(t_params *params, unsigned int value, int *count)
 	*count += ft_strlen(ft_itoa_u(value));
 }
 
-void	ft_handle_u(t_params *params, va_list *ap, int *count)
+void		ft_handle_u(t_params *params, va_list *ap, int *count)
 {
 	unsigned int	value;
 

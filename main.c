@@ -7,10 +7,10 @@
 
 int 	main(void)
 {
-	int a = 1245634;
+	//int a = 245678;
 
-	int ac = printf("%30X\n", a);
-	int bc = ft_printf("%30X\n", a);
+	int ac = printf("A:%05%\n");
+	int bc = ft_printf("B:%05%\n");
 	printf("[%i][%i]\n", ac, bc);
 	return (0);
 }
