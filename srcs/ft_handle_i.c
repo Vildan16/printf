@@ -50,7 +50,7 @@ static void	ft_printi_min(t_params *params, int value, int sign, int *count)
 		i++;
 	}
 	ft_putnbr(value);
-	*count += ft_integer_len(value);
+	*count += len;
 	while (i < (params->width - len))
 	{
 		ft_putchar(' ');
@@ -91,7 +91,7 @@ static void	ft_prizero(t_params *params, int value, int sign, int *count)
 		*count += 1;
 	}
 	ft_putnbr(value);
-	*count += ft_integer_len(value);
+	*count += len;
 }
 
 static void	ft_printi_noflags(t_params *params, int value, int sign, int *count)
@@ -124,7 +124,7 @@ static void	ft_printi_noflags(t_params *params, int value, int sign, int *count)
 		i++;
 	}
 	ft_putnbr(value);
-	*count += ft_integer_len(value);
+	*count += len;
 }
 
 void		ft_handle_i(t_params *params, va_list *ap, int *count)

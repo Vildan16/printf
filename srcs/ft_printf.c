@@ -17,6 +17,8 @@ int		ft_printf(const char *fmt, ...)
 	va_list ap;
 	int		count;
 
+	if (!fmt || !fmt[0])
+		return (0);
 	count = 0;
 	va_start(ap, fmt);
 	while (*fmt)

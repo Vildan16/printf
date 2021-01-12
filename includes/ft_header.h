@@ -6,6 +6,7 @@
 # define FT_HEADER_H
 
 # include <stdarg.h>
+# include <stdio.h> //remove
 # include "../libft/libft.h"
 
 typedef struct		s_params

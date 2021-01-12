@@ -26,7 +26,7 @@ static void	ft_prints_min(t_params *params, va_list *ap, int *count)
 	if (!string)
 	{
 		ft_putstr("(null)", len);
-		*count += 6;
+		*count += len;
 	}
 	else
 	{
@@ -61,7 +61,7 @@ static void	ft_prints_nomin(t_params *params, va_list *ap, int *count)
 	if (!string)
 	{
 		ft_putstr("(null)", len);
-		*count += 6;
+		*count += len;
 	}
 	else
 	{
@@ -73,7 +73,10 @@ static void	ft_prints_nomin(t_params *params, va_list *ap, int *count)
 void		ft_handle_s(t_params *params, va_list *ap, int *count)
 {
 	if (params->isprecision == 1 && params->precision == 0 && params->width == 0)
+	{
+		va_arg(*ap, char *);
 		return ;
+	}
 	if (params->flag_minus == 1)
 		ft_prints_min(params, ap, count);
 	else
