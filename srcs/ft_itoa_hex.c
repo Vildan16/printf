@@ -36,7 +36,7 @@ char		*ft_itoa_hex(unsigned long value)
 	hex = (char *)malloc(sizeof(char) * (nn + 1));
 	number = 0;
 	if (value == 0)
-		return ("0");
+		return (NULL);
 	while (value != 0)
 	{
 		division = value % 16;
