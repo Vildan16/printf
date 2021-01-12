@@ -17,12 +17,6 @@ static void	ft_printperc_min(t_params *params, int *count)
 	int i;
 
 	i = 0;
-	while (i < (params->precision - 1))
-	{
-		ft_putchar('0');
-		*count += 1;
-		i++;
-	}
 	ft_putchar('%');
 	*count += 1;
 	while (i < (params->width - 1))
@@ -50,12 +44,6 @@ static void	ft_printperc_zero(t_params *params, int *count)
 		i++;
 	}
 	i = 1;
-	while (i < (params->precision))
-	{
-		ft_putchar('0');
-		i++;
-		*count += 1;
-	}
 	ft_putchar('%');
 	*count += 1;
 }
@@ -70,12 +58,6 @@ static void	ft_printperc_noflags(t_params *params, int *count)
 		ft_putchar(' ');
 		*count += 1;
 		i++;
-	}
-	while (i < (params->precision - 1))
-	{
-		ft_putchar('0');
-		i++;
-		*count += 1;
 	}
 	ft_putchar('%');
 	*count += 1;
