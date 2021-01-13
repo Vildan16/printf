@@ -12,17 +12,17 @@
 
 #include "ft_header.h"
 
-void		ft_putnbr(int n)
+void		ft_putnbr(int n, int *count)
 {
 	int		i;
 	char	a[15];
 
 	i = 0;
 	if (n == 0)
-		ft_putchar('0');
+		ft_putchar('0', count);
 	if (n == -2147483648)
 	{
-		ft_putchar('2');
+		ft_putchar('2', count);
 		n = 147483648;
 	}
 	if (n < 0)
@@ -36,5 +36,5 @@ void		ft_putnbr(int n)
 		i++;
 	}
 	while (--i >= 0)
-		ft_putchar(a[i]);
+		ft_putchar(a[i], count);
 }

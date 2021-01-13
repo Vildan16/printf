@@ -12,7 +12,7 @@
 
 #include "ft_header.h"
 
-void	ft_putstr(char *s, int size)
+void	ft_putstr(char *s, int size, int *count)
 {
 	int	i;
 
@@ -21,7 +21,7 @@ void	ft_putstr(char *s, int size)
 	i = 0;
 	while (s[i] && i < size)
 	{
-		ft_putchar(s[i]);
+		ft_putchar(s[i], count);
 		i++;
 	}
 }

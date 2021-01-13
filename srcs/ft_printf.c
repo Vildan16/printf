@@ -30,10 +30,7 @@ int		ft_printf(const char *fmt, ...)
 				return (-1);
 		}
 		else
-		{
-			ft_putchar(*fmt);
-			count++;
-		}
+			ft_putchar(*fmt, &count);
 		fmt++;
 	}
 	va_end(ap);

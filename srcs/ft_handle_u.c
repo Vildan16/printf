@@ -12,13 +12,13 @@
 
 #include "ft_header.h"
 
-static void	ft_putnbru(long long n)
+static void	ft_putnbru(long long n, int *count)
 {
 	if (n < 0)
 	{
 		if (n == -2147483648)
 		{
-			ft_putchar('2');
+			ft_putchar('2', count);
 			n = 147483648;
 		}
 		else
@@ -26,9 +26,9 @@ static void	ft_putnbru(long long n)
 	}
 	if (n >= 10)
 	{
-		ft_putnbru(n / 10);
+		ft_putnbru(n / 10, count);
 	}
-	ft_putchar('0' + (n % 10));
+	ft_putchar('0' + (n % 10), count);
 }
 
 static void	ft_printu_min(t_params *params, unsigned int value, int *count)
@@ -42,16 +42,13 @@ static void	ft_printu_min(t_params *params, unsigned int value, int *count)
 	len = ft_strlen(str);
 	while (i < (params->precision - len))
 	{
-		ft_putchar('0');
-		*count += 1;
+		ft_putchar('0', count);
 		i++;
 	}
-	ft_putnbru(value);
-	*count += ft_strlen(str);
+	ft_putnbru(value, count);
 	while (i < (params->width - len))
 	{
-		ft_putchar(' ');
-		*count += 1;
+		ft_putchar(' ', count);
 		i++;
 	}
 }
@@ -70,21 +67,18 @@ static void	ft_printu_zero(t_params *params, unsigned int value, int *count)
 	while (i < (params->width - params->precision))
 	{
 		if (params->isprecision == 0)
-			ft_putchar('0');
+			ft_putchar('0', count);
 		else
-			ft_putchar(' ');
-		*count += 1;
+			ft_putchar(' ', count);
 		i++;
 	}
 	i = len;
 	while (i < (params->precision))
 	{
-		ft_putchar('0');
-		*count += 1;
+		ft_putchar('0', count);
 		i++;
 	}
-	ft_putnbru(value);
-	*count += ft_strlen(str);
+	ft_putnbru(value, count);
 }
 
 static void	ft_printu_noflags(t_params *params, unsigned int value, int *count)
@@ -100,19 +94,16 @@ static void	ft_printu_noflags(t_params *params, unsigned int value, int *count)
 							params->precision;
 	while (i < (params->width - params->precision))
 	{
-		ft_putchar(' ');
-		*count += 1;
+		ft_putchar(' ', count);
 		i++;
 	}
 	i = 0;
 	while (i < (params->precision - len))
 	{
-		ft_putchar('0');
-		*count += 1;
+		ft_putchar('0', count);
 		i++;
 	}
-	ft_putnbru(value);
-	*count += ft_strlen(str);
+	ft_putnbru(value, count);
 }
 
 void		ft_handle_u(t_params *params, va_list *ap, int *count)

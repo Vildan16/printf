@@ -17,12 +17,10 @@ static void	ft_printperc_min(t_params *params, int *count)
 	int i;
 
 	i = 0;
-	ft_putchar('%');
-	*count += 1;
+	ft_putchar('%', count);
 	while (i < (params->width - 1))
 	{
-		ft_putchar(' ');
-		*count += 1;
+		ft_putchar(' ', count);
 		i++;
 	}
 }
@@ -37,15 +35,13 @@ static void	ft_printperc_zero(t_params *params, int *count)
 	while (i < (params->width - params->precision))
 	{
 		if (params->isprecision == 0)
-			ft_putchar('0');
+			ft_putchar('0', count);
 		else
-			ft_putchar(' ');
-		*count += 1;
+			ft_putchar(' ', count);
 		i++;
 	}
 	i = 1;
-	ft_putchar('%');
-	*count += 1;
+	ft_putchar('%', count);
 }
 
 static void	ft_printperc_noflags(t_params *params, int *count)
@@ -55,12 +51,10 @@ static void	ft_printperc_noflags(t_params *params, int *count)
 	i = 0;
 	while (i < (params->width - 1))
 	{
-		ft_putchar(' ');
-		*count += 1;
+		ft_putchar(' ', count);
 		i++;
 	}
-	ft_putchar('%');
-	*count += 1;
+	ft_putchar('%', count);
 }
 
 void		ft_handle_percent(t_params *params, int *count)

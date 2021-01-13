@@ -19,8 +19,7 @@ void	ft_print_zero(t_params *params, int *count)
 	i = 0;
 	while (i < params->width)
 	{
-		ft_putchar(' ');
-		*count += 1;
+		ft_putchar(' ', count);
 		i++;
 	}
 }

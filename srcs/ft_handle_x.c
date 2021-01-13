@@ -23,19 +23,16 @@ static void	ft_printx_min(t_params *params, unsigned int value, int *count)
 	len = ft_strlen(str);
 	while (i < (params->precision - len))
 	{
-		ft_putchar('0');
-		*count += 1;
+		ft_putchar('0', count);
 		i++;
 	}
 	if (params->type == 'x')
-		ft_putstr(str, 10000);
+		ft_putstr(str, 10000, count);
 	else
-		ft_putstr(ft_strtoupper(str), 10000);
-	*count += ft_strlen(str);
+		ft_putstr(ft_strtoupper(str), 10000, count);
 	while (i < (params->width - len))
 	{
-		ft_putchar(' ');
-		*count += 1;
+		ft_putchar(' ', count);
 		i++;
 	}
 }
@@ -54,24 +51,19 @@ static void	ft_printx_zero(t_params *params, unsigned int value, int *count)
 	while (i < (params->width - params->precision))
 	{
 		if (params->isprecision == 0)
-			ft_putchar('0');
+			ft_putchar('0', count);
 		else
-			ft_putchar(' ');
-		*count += 1;
+			ft_putchar(' ', count);
 		i++;
 	}
 	i = len;
 	while (i < (params->precision))
 	{
-		ft_putchar('0');
-		*count += 1;
+		ft_putchar('0', count);
 		i++;
 	}
-	if (params->type == 'x')
-		ft_putstr(str, 1000);
-	else
-		ft_putstr(ft_strtoupper(str), 1000);
-	*count += ft_strlen(str);
+	(params->type == 'x') ? ft_putstr(str, 1000, count) :
+		ft_putstr(ft_strtoupper(str), 1000, count);
 }
 
 static void	ft_printx_noflags(t_params *params, unsigned int value, int *count)
@@ -87,22 +79,19 @@ static void	ft_printx_noflags(t_params *params, unsigned int value, int *count)
 							params->precision;
 	while (i < (params->width - params->precision))
 	{
-		ft_putchar(' ');
-		*count += 1;
+		ft_putchar(' ', count);
 		i++;
 	}
 	i = 0;
 	while (i < (params->precision - len))
 	{
-		ft_putchar('0');
-		*count += 1;
+		ft_putchar('0', count);
 		i++;
 	}
 	if (params->type == 'x')
-		ft_putstr(str, 1000);
+		ft_putstr(str, 1000, count);
 	else
-		ft_putstr(ft_strtoupper(str), 1000);
-	*count += ft_strlen(str);
+		ft_putstr(ft_strtoupper(str), 1000, count);
 }
 
 void		ft_handle_x(t_params *params, va_list *ap, int *count)
@@ -112,8 +101,7 @@ void		ft_handle_x(t_params *params, va_list *ap, int *count)
 	value = va_arg(*ap, unsigned int);
 	if (value == 0 && params->width == 0 && params->isprecision == 0)
 	{
-		ft_putchar('0');
-		*count += 1;
+		ft_putchar('0', count);
 		return ;
 	}
 	if (params->isprecision == 1 && params->precision == 0 && value == 0)

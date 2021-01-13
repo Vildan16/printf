@@ -24,19 +24,12 @@ static void	ft_prints_min(t_params *params, va_list *ap, int *count)
 	len = (params->isprecision == 0 || len < params->precision) ?
 			len : params->precision;
 	if (!string)
-	{
-		ft_putstr("(null)", len);
-		*count += len;
-	}
+		ft_putstr("(null)", len, count);
 	else
-	{
-		ft_putstr(string, len);
-		*count += len;
-	}
+		ft_putstr(string, len, count);
 	while (i < (params->width - len))
 	{
-		ft_putchar(' ');
-		*count += 1;
+		ft_putchar(' ', count);
 		i++;
 	}
 }
@@ -54,20 +47,13 @@ static void	ft_prints_nomin(t_params *params, va_list *ap, int *count)
 			len : params->precision;
 	while (i < (params->width - len))
 	{
-		ft_putchar(' ');
-		*count += 1;
+		ft_putchar(' ', count);
 		i++;
 	}
 	if (!string)
-	{
-		ft_putstr("(null)", len);
-		*count += len;
-	}
+		ft_putstr("(null)", len, count);
 	else
-	{
-		ft_putstr(string, len);
-		*count += len;
-	}
+		ft_putstr(string, len, count);
 }
 
 void		ft_handle_s(t_params *params, va_list *ap, int *count)

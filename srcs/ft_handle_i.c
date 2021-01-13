@@ -39,23 +39,17 @@ static void	ft_printi_min(t_params *params, int value, int sign, int *count)
 		: ft_integer_len(value) - 1;
 	params->width = (sign) ? params->width - 1 : params->width;
 	if (sign == 1)
-	{
-		ft_putchar('-');
-		*count += 1;
-	}
+		ft_putchar('-', count);
 	while (i < (params->precision - len))
 	{
-		ft_putchar('0');
-		*count += 1;
+		ft_putchar('0', count);
 		i++;
 	}
-	ft_putnbr(value);
-	*count += len;
+	ft_putnbr(value, count);
 	while (i < (params->width - len))
 	{
-		ft_putchar(' ');
+		ft_putchar(' ', count);
 		i++;
-		*count += 1;
 	}
 }
 
@@ -72,26 +66,20 @@ static void	ft_prizero(t_params *params, int value, int sign, int *count)
 	while (i < (params->width - params->precision))
 	{
 		if (params->isprecision == 0)
-			ft_putchar('0');
+			ft_putchar('0', count);
 		else
-			ft_putchar(' ');
+			ft_putchar(' ', count);
 		i++;
-		*count += 1;
 	}
 	i = ft_integer_len(value);
 	if (sign == 1)
-	{
-		ft_putchar('-');
-		*count += 1;
-	}
+		ft_putchar('-', count);
 	while (i < (params->precision))
 	{
-		ft_putchar('0');
+		ft_putchar('0', count);
 		i++;
-		*count += 1;
 	}
-	ft_putnbr(value);
-	*count += len;
+	ft_putnbr(value, count);
 }
 
 static void	ft_printi_noflags(t_params *params, int value, int sign, int *count)
@@ -107,32 +95,24 @@ static void	ft_printi_noflags(t_params *params, int value, int sign, int *count)
 	params->width = (sign) ? params->width - 1 : params->width;
 	while (i < (params->width - len - reset))
 	{
-		ft_putchar(' ');
-		*count += 1;
+		ft_putchar(' ', count);
 		i++;
 	}
 	i = 0;
 	if (sign == 1)
-	{
-		ft_putchar('-');
-		*count += 1;
-	}
+		ft_putchar('-', count);
 	while (i < (params->precision - len))
 	{
-		ft_putchar('0');
-		*count += 1;
+		ft_putchar('0', count);
 		i++;
 	}
-	ft_putnbr(value);
-	*count += len;
+	ft_putnbr(value, count);
 }
 
-void		ft_handle_i(t_params *params, va_list *ap, int *count)
+void		ft_handle_i(t_params *params, va_list *ap, int *count, int sign)
 {
 	int value;
-	int sign;
 
-	sign = 0;
 	value = va_arg(*ap, int);
 	if (params->isprecision == 1 && params->precision == 0 && value == 0)
 	{
@@ -146,8 +126,7 @@ void		ft_handle_i(t_params *params, va_list *ap, int *count)
 		if (((params->width < ft_integer_len(value)) && params->precision == 0)
 			|| (params->flag_zero && params->isprecision == 0))
 		{
-			ft_putchar('-');
-			*count += 1;
+			ft_putchar('-', count);
 			sign = 2;
 		}
 	}

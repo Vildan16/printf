@@ -19,12 +19,10 @@ static void	ft_printc_min(t_params *params, va_list *ap, int *count)
 
 	i = 0;
 	chr = va_arg(*ap, int);
-	ft_putchar((char)chr);
-	*(count) += 1;
+	ft_putchar((char)chr, count);
 	while (i < (params->width - 1))
 	{
-		ft_putchar(' ');
-		*(count) += 1;
+		ft_putchar(' ', count);
 		i++;
 	}
 }
@@ -38,12 +36,10 @@ static void	ft_printc_nomin(t_params *params, va_list *ap, int *count)
 	chr = va_arg(*ap, int);
 	while (i < (params->width - 1))
 	{
-		ft_putchar(' ');
-		*(count) += 1;
+		ft_putchar(' ', count);
 		i++;
 	}
-	ft_putchar((char)chr);
-	*(count) += 1;
+	ft_putchar((char)chr, count);
 }
 
 void		ft_handle_c(t_params *params, va_list *ap, int *count)
