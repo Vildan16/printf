@@ -33,11 +33,13 @@ static void	ft_putnbru(long long n)
 
 static void	ft_printu_min(t_params *params, unsigned int value, int *count)
 {
-	int				len;
-	int				i;
+	int		len;
+	int		i;
+	char	*str;
 
+	str = ft_itoa_u(value);
 	i = 0;
-	len = ft_strlen(ft_itoa_u(value));
+	len = ft_strlen(str);
 	while (i < (params->precision - len))
 	{
 		ft_putchar('0');
@@ -45,7 +47,7 @@ static void	ft_printu_min(t_params *params, unsigned int value, int *count)
 		i++;
 	}
 	ft_putnbru(value);
-	*count += ft_strlen(ft_itoa_u(value));
+	*count += ft_strlen(str);
 	while (i < (params->width - len))
 	{
 		ft_putchar(' ');
@@ -56,11 +58,13 @@ static void	ft_printu_min(t_params *params, unsigned int value, int *count)
 
 static void	ft_printu_zero(t_params *params, unsigned int value, int *count)
 {
-	int	len;
-	int	i;
+	int		len;
+	int		i;
+	char	*str;
 
+	str = ft_itoa_u(value);
 	i = 0;
-	len = ft_strlen(ft_itoa_u(value));
+	len = ft_strlen(str);
 	params->precision = (params->precision < len) ? len :
 							params->precision;
 	while (i < (params->width - params->precision))
@@ -80,16 +84,18 @@ static void	ft_printu_zero(t_params *params, unsigned int value, int *count)
 		i++;
 	}
 	ft_putnbru(value);
-	*count += ft_strlen(ft_itoa_u(value));
+	*count += ft_strlen(str);
 }
 
 static void	ft_printu_noflags(t_params *params, unsigned int value, int *count)
 {
-	int	len;
-	int	i;
+	int		len;
+	int		i;
+	char	*str;
 
+	str = ft_itoa_u(value);
 	i = 0;
-	len = ft_strlen(ft_itoa_u(value));
+	len = ft_strlen(str);
 	params->precision = (params->precision < len) ? len :
 							params->precision;
 	while (i < (params->width - params->precision))
@@ -106,7 +112,7 @@ static void	ft_printu_noflags(t_params *params, unsigned int value, int *count)
 		i++;
 	}
 	ft_putnbru(value);
-	*count += ft_strlen(ft_itoa_u(value));
+	*count += ft_strlen(str);
 }
 
 void		ft_handle_u(t_params *params, va_list *ap, int *count)

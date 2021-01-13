@@ -12,7 +12,8 @@
 
 #include "ft_header.h"
 
-void	ft_get_precision(const char **fmt, va_list *ap, int *precision, int *isprecision)
+void	ft_get_precision(const char **fmt, va_list *ap, \
+int *precision, int *isprecision)
 {
 	*precision = 0;
 	*isprecision = 0;

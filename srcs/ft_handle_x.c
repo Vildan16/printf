@@ -14,11 +14,13 @@
 
 static void	ft_printx_min(t_params *params, unsigned int value, int *count)
 {
-	int				len;
-	int				i;
+	int		len;
+	int		i;
+	char	*str;
 
 	i = 0;
-	len = ft_strlen(ft_itoa_hex(value));
+	str = ft_itoa_hex(value);
+	len = ft_strlen(str);
 	while (i < (params->precision - len))
 	{
 		ft_putchar('0');
@@ -26,10 +28,10 @@ static void	ft_printx_min(t_params *params, unsigned int value, int *count)
 		i++;
 	}
 	if (params->type == 'x')
-		ft_putstr(ft_itoa_hex(value), 10000);
+		ft_putstr(str, 10000);
 	else
-		ft_putstr(ft_strtoupper(ft_itoa_hex(value)), 10000);
-	*count += ft_strlen(ft_itoa_hex(value));
+		ft_putstr(ft_strtoupper(str), 10000);
+	*count += ft_strlen(str);
 	while (i < (params->width - len))
 	{
 		ft_putchar(' ');
@@ -40,11 +42,13 @@ static void	ft_printx_min(t_params *params, unsigned int value, int *count)
 
 static void	ft_printx_zero(t_params *params, unsigned int value, int *count)
 {
-	int				len;
-	int				i;
+	int		len;
+	int		i;
+	char	*str;
 
 	i = 0;
-	len = ft_strlen(ft_itoa_hex(value));
+	str = ft_itoa_hex(value);
+	len = ft_strlen(str);
 	params->precision = (params->precision < len) ? len :
 							params->precision;
 	while (i < (params->width - params->precision))
@@ -64,19 +68,21 @@ static void	ft_printx_zero(t_params *params, unsigned int value, int *count)
 		i++;
 	}
 	if (params->type == 'x')
-		ft_putstr(ft_itoa_hex(value), 1000);
+		ft_putstr(str, 1000);
 	else
-		ft_putstr(ft_strtoupper(ft_itoa_hex(value)), 1000);
-	*count += ft_strlen(ft_itoa_hex(value));
+		ft_putstr(ft_strtoupper(str), 1000);
+	*count += ft_strlen(str);
 }
 
 static void	ft_printx_noflags(t_params *params, unsigned int value, int *count)
 {
-	int				len;
-	int				i;
+	int		len;
+	int		i;
+	char	*str;
 
 	i = 0;
-	len = ft_strlen(ft_itoa_hex(value));
+	str = ft_itoa_hex(value);
+	len = ft_strlen(str);
 	params->precision = (params->precision < len) ? len :
 							params->precision;
 	while (i < (params->width - params->precision))
@@ -93,10 +99,10 @@ static void	ft_printx_noflags(t_params *params, unsigned int value, int *count)
 		i++;
 	}
 	if (params->type == 'x')
-		ft_putstr(ft_itoa_hex(value), 1000);
+		ft_putstr(str, 1000);
 	else
-		ft_putstr(ft_strtoupper(ft_itoa_hex(value)), 1000);
-	*count += ft_strlen(ft_itoa_hex(value));
+		ft_putstr(ft_strtoupper(str), 1000);
+	*count += ft_strlen(str);
 }
 
 void		ft_handle_x(t_params *params, va_list *ap, int *count)
