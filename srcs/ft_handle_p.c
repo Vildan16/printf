@@ -27,7 +27,7 @@ static void	ft_printp_min(t_params *params, va_list *ap, int *count)
 	len = (params->isprecision == 1 && value == 0) ? 2 :
 			ft_strlen(str) + 2;
 	ft_putstr("0x", 2, count);
-	if (params->precision != 1)
+	if (params->precision > 1 || params->isprecision == 0)
 		ft_putstr(str, 10000, count);
 	while (i < (params->width - len))
 	{
