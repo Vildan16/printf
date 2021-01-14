@@ -32,6 +32,8 @@ static void	ft_printperc_zero(t_params *params, int *count)
 	i = 0;
 	params->precision = (params->precision == 0) ? 1 :
 							params->precision;
+	params->precision = (params->width != 0) ? 1 :
+							params->precision;
 	while (i < (params->width - params->precision))
 	{
 		if (params->isprecision == 0 || params->precision == 1)
