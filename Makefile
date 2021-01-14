@@ -1,42 +1,68 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ameta <marvin@42.fr>                       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/01/14 13:10:52 by ameta             #+#    #+#              #
+#    Updated: 2021/01/14 13:10:56 by ameta            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = libftprintf.a
 
-OBJ =	ft_get_flags.o \
-		ft_get_precision.o \
-		ft_get_type.o \
-		ft_get_width.o \
-		ft_handle.o \
-		ft_handle_c.o \
-		ft_handle_i.o \
-		ft_handle_p.o \
-		ft_handle_percent.o \
-		ft_handle_s.o \
-		ft_handle_x.o \
-		ft_handle_u.o \
-		ft_itoa_u.o \
-		ft_itoa_hex.o \
-		ft_printf.o \
-		ft_putchar.o \
-		ft_putnbr.o \
-		ft_print_zero.o \
-		ft_putstr.o \
-		ft_strtoupper.o \
+SOURCES = 	ft_get_flags.c \
+			ft_get_precision.c \
+			ft_get_type.c \
+			ft_get_width.c \
+			ft_handle.c \
+			ft_handle_c.c \
+			ft_handle_i.c \
+			ft_handle_p.c \
+			ft_handle_percent.c \
+			ft_handle_s.c \
+			ft_handle_x.c \
+			ft_handle_u.c \
+			ft_itoa_u.c \
+			ft_itoa_hex.c \
+			ft_printf.c \
+			ft_putchar.c \
+			ft_putnbr.c \
+			ft_print_zero.c \
+			ft_putstr.c \
+			ft_strtoupper.c
+
+CC = gcc
+
+FLAGS = -Wall -Wextra -Werror
+
+LIBFT = libft
+
+DIR_S = srcs
+
+HEADER = includes
+
+SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
+
+OBJS = $(SOURCES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@make -C libft
-	@ar rc $(NAME) $(OBJ) libft/*.o
-	ranlib $(NAME)
-
-$(OBJ):
-	@gcc -Wall -Wextra -Werror -I includes -c $(addprefix srcs/,$(patsubst %.o, %.c, $@))
+$(NAME): $(OBJS)
+	@make -C $(LIBFT)
+	@cp libft/libft.a ./$(NAME)
+	@ar rc $(NAME) $(OBJS)
+	
+%.o: $(DIR_S)/%.c
+	@$(CC) $(FLAGS) -I $(HEADER) -o $@ -c $<
 
 clean:
-	@rm -f *.o
+	@rm -f $(OBJS)
+	@make clean -C $(LIBFT)
 
 fclean: clean
 	@rm -f $(NAME)
-	@make fclean -C libft
+	@make fclean -C $(LIBFT)
 
 re: fclean all
