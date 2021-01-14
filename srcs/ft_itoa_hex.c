@@ -16,6 +16,8 @@ static int	ft_nn(unsigned long value)
 {
 	int	number;
 
+	if (value == 0)
+		return (1);
 	number = 0;
 	while (value != 0)
 	{
@@ -34,9 +36,9 @@ char		*ft_itoa_hex(unsigned long value)
 
 	nn = ft_nn(value);
 	hex = (char *)malloc(sizeof(char) * (nn + 1));
-	number = 0;
 	if (value == 0)
-		return (0);
+		hex[0] = '0';
+	number = 0;
 	while (value != 0)
 	{
 		division = value % 16;
