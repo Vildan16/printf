@@ -6,7 +6,7 @@
 /*   By: ameta <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 15:14:29 by ameta             #+#    #+#             */
-/*   Updated: 2021/01/10 15:20:53 by ameta            ###   ########.fr       */
+/*   Updated: 2021/01/16 17:09:13 by ameta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	ft_printx_min(t_params *params, unsigned int value, int *count)
 		ft_putchar(' ', count);
 		i++;
 	}
+	free(str);
 }
 
 static void	ft_printx_zero(t_params *params, unsigned int value, int *count)
@@ -50,10 +51,8 @@ static void	ft_printx_zero(t_params *params, unsigned int value, int *count)
 							params->precision;
 	while (i < (params->width - params->precision))
 	{
-		if (params->isprecision == 0)
-			ft_putchar('0', count);
-		else
-			ft_putchar(' ', count);
+		(params->isprecision == 0) ? ft_putchar('0', count)
+			: ft_putchar(' ', count);
 		i++;
 	}
 	i = len;
@@ -64,6 +63,7 @@ static void	ft_printx_zero(t_params *params, unsigned int value, int *count)
 	}
 	(params->type == 'x') ? ft_putstr(str, 1000, count) :
 		ft_putstr(ft_strtoupper(str), 1000, count);
+	free(str);
 }
 
 static void	ft_printx_noflags(t_params *params, unsigned int value, int *count)
@@ -92,6 +92,7 @@ static void	ft_printx_noflags(t_params *params, unsigned int value, int *count)
 		ft_putstr(str, 1000, count);
 	else
 		ft_putstr(ft_strtoupper(str), 1000, count);
+	free(str);
 }
 
 void		ft_handle_x(t_params *params, va_list *ap, int *count)

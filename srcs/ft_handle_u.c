@@ -51,6 +51,7 @@ static void	ft_printu_min(t_params *params, unsigned int value, int *count)
 		ft_putchar(' ', count);
 		i++;
 	}
+	free(str);
 }
 
 static void	ft_printu_zero(t_params *params, unsigned int value, int *count)
@@ -79,6 +80,7 @@ static void	ft_printu_zero(t_params *params, unsigned int value, int *count)
 		i++;
 	}
 	ft_putnbru(value, count);
+	free(str);
 }
 
 static void	ft_printu_noflags(t_params *params, unsigned int value, int *count)
@@ -104,6 +106,7 @@ static void	ft_printu_noflags(t_params *params, unsigned int value, int *count)
 		i++;
 	}
 	ft_putnbru(value, count);
+	free(str);
 }
 
 void		ft_handle_u(t_params *params, va_list *ap, int *count)

@@ -37,6 +37,18 @@ static void	ft_printp_min(t_params *params, va_list *ap, int *count)
 	free(str);
 }
 
+static void	ft_printp_nomin2(t_params *params, int len, int *count)
+{
+	int i;
+
+	i = 0;
+	while (i < (params->precision - (len - 2)))
+	{
+		ft_putchar('0', count);
+		i++;
+	}
+}
+
 static void	ft_printp_nomin(t_params *params, va_list *ap, int *count)
 {
 	void	*value;
@@ -57,8 +69,8 @@ static void	ft_printp_nomin(t_params *params, va_list *ap, int *count)
 		i++;
 	}
 	ft_putstr("0x", 2, count);
-	if ((params->isprecision == 1 && params->precision != 0) || \
-	(params->isprecision == 1 && value == 0))
+	ft_printp_nomin2(params, len, count);
+	if (params->isprecision == 1 && value == 0)
 		return ;
 	else
 		ft_putstr(str, 10000, count);

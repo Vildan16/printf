@@ -18,11 +18,15 @@ static void	ft_get_params(const char **fmt, va_list *ap, t_params *params)
 	params->width = ft_get_width(fmt, ap);
 	ft_get_precision(fmt, ap, &params->precision, &params->isprecision);
 	params->type = ft_get_type(*fmt);
-	params->isprecision = (params->precision < 0) ? 0 : params->isprecision;
-	params->precision = (params->precision < 0) ? 0 :
-							params->precision;
-	params->flag_minus = (params->width < 0) ? 1 : params->flag_minus;
-	params->width = params->width < 0 ? (-1 * params->width) : params->width;
+	if (params->precision < 0)
+	{
+		params->isprecision = 0;
+		params->precision = 0;
+	}
+	if (params->width < 0)
+		params->flag_minus = 1;
+	if (params->width < 0)
+		params->width *= -1;
 }
 
 int			ft_handle(const char **fmt, va_list *ap, int *count)

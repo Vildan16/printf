@@ -47,7 +47,10 @@ static void	ft_prints_nomin(t_params *params, va_list *ap, int *count)
 			len : params->precision;
 	while (i < (params->width - len))
 	{
-		ft_putchar(' ', count);
+		if (params->flag_zero)
+			ft_putchar('0', count);
+		else
+			ft_putchar(' ', count);
 		i++;
 	}
 	if (!string)
