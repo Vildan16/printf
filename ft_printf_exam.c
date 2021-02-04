@@ -6,10 +6,12 @@
 /*   By: ameta <ameta@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 17:46:48 by ameta             #+#    #+#             */
-/*   Updated: 2021/02/03 18:41:59 by ameta            ###   ########.fr       */
+/*   Updated: 2021/02/04 12:19:37 by ameta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <stdarg.h>
 #include <unistd.h>
 #include <stdio.h>
 
@@ -26,6 +28,46 @@ static void ft_putchar(char c, int *count)
 	write(1, &c, 1);
 	*count += 1;
 }
+
+static int ft_strlen(const char *s)
+{
+	int	i;
+
+	if (!s)
+		return (0);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+static void		ft_putnbr(int n, int *count)
+{
+	int		i;
+	char	a[15];
+
+	i = 0;
+	if (n == 0)
+		ft_putchar('0', count);
+	if (n == -2147483648)
+	{
+		ft_putchar('2', count);
+		n = 147483648;
+	}
+	if (n < 0)
+	{
+		n = -1 * n;
+	}
+	while (n != 0)
+	{
+		a[i] = n % 10 + '0';
+		n = n / 10;
+		i++;
+	}
+	while (--i >= 0)
+		ft_putchar(a[i], count);
+}
+
 
 static int		ft_atoi(const char *nptr)
 {
@@ -351,4 +393,13 @@ int		    ft_printf(const char *fmt, ...)
 	}
 	va_end(ap);
 	return (count);
+}
+
+int		main(void)
+{
+	int a = 12345;
+
+	int ac = printf("A| %.1x\n", a);
+	int bc = ft_printf("B| %.1x\n", a);
+	printf("[%d][%d]", ac, bc);
 }
