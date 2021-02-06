@@ -6,14 +6,15 @@
 /*   By: ameta <ameta@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 17:46:48 by ameta             #+#    #+#             */
-/*   Updated: 2021/02/04 12:19:37 by ameta            ###   ########.fr       */
+/*   Updated: 2021/02/06 10:55:07 by ameta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <unistd.h>
-#include <stdio.h>
+#include <limits.h>
 
 typedef struct	s_params
 {
@@ -40,7 +41,7 @@ static int ft_strlen(const char *s)
 		i++;
 	return (i);
 }
-
+/*
 static void		ft_putnbr(int n, int *count)
 {
 	int		i;
@@ -67,7 +68,29 @@ static void		ft_putnbr(int n, int *count)
 	while (--i >= 0)
 		ft_putchar(a[i], count);
 }
+*/
 
+void    ft_putnbr(int a, int *count)
+{
+    char c[15];
+    int i = 0;
+
+    if (a == 0)
+        ft_putchar('0', count);
+	else if (a == INT_MIN)
+    {
+        ft_putchar('2', count);
+        a = 147483648;
+    }
+    while (a != 0)
+    {
+        c[i] = a % 10 + '0';
+        a = a / 10;
+        i++;
+    }
+    while (--i >= 0)
+        ft_putchar(c[i], count);
+}
 
 static int		ft_atoi(const char *nptr)
 {
@@ -96,7 +119,7 @@ static int		ft_atoi(const char *nptr)
 	return (res * minus);
 }
 
-static int		ft_get_width(const char **fmt, va_list *ap)
+static int		ft_get_width(const char **fmt)
 {
 	int		result;
 
@@ -108,7 +131,7 @@ static int		ft_get_width(const char **fmt, va_list *ap)
 	return (result);
 }
 
-static void	ft_get_precision(const char **fmt, va_list *ap, int *precision, int *isprecision)
+static void	ft_get_precision(const char **fmt, int *precision, int *isprecision)
 {
 	*precision = 0;
 	*isprecision = 0;
@@ -118,8 +141,6 @@ static void	ft_get_precision(const char **fmt, va_list *ap, int *precision, int 
 		*fmt += 1;
 		if (**fmt >= '0' && **fmt <= '9')
 			*precision = ft_atoi(*fmt);
-		else if (**fmt == '*')
-			*precision = va_arg(*ap, int);
 		while ((**fmt >= '0' && **fmt <= '9') || **fmt == '*' || **fmt == '-')
 			*fmt += 1;
 	}
@@ -139,10 +160,10 @@ static char	ft_get_type(const char *fmt)
 	return (result);
 }
 
-static void	ft_get_params(const char **fmt, va_list *ap, t_params *params)
+static void	ft_get_params(const char **fmt, t_params *params)
 {
-	params->width = ft_get_width(fmt, ap);
-	ft_get_precision(fmt, ap, &params->precision, &params->isprecision);
+	params->width = ft_get_width(fmt);
+	ft_get_precision(fmt, &params->precision, &params->isprecision);
 	params->type = ft_get_type(*fmt);
 	if (params->precision < 0)
 	{
@@ -244,7 +265,7 @@ void	ft_putstr(char *s, int size, int *count)
 	}
 }
 
-static void	ft_prints_nomin(t_params *params, va_list *ap, int *count)
+static void		ft_handle_s(t_params *params, va_list *ap, int *count)
 {
 	char	*string;
 	int		len;
@@ -264,11 +285,6 @@ static void	ft_prints_nomin(t_params *params, va_list *ap, int *count)
 		ft_putstr("(null)", len, count);
 	else
 		ft_putstr(string, len, count);
-}
-
-static void		ft_handle_s(t_params *params, va_list *ap, int *count)
-{
-	ft_prints_nomin(params, ap, count);
 }
 
 static int	ft_nn(unsigned long value)
@@ -356,7 +372,7 @@ static int  ft_handle(const char **fmt, va_list *ap, int *count)
 {
 	t_params params;
 
-	ft_get_params(fmt, ap, &params);
+	ft_get_params(fmt, &params);
 	if (params.type == '0')
 		return (0);
 	if (params.type == 'd')
@@ -367,8 +383,6 @@ static int  ft_handle(const char **fmt, va_list *ap, int *count)
 		ft_handle_x(&params, ap, count);
 	return (1);
 }
-
-
 
 int		    ft_printf(const char *fmt, ...)
 {
@@ -397,9 +411,9 @@ int		    ft_printf(const char *fmt, ...)
 
 int		main(void)
 {
-	int a = 12345;
+	char *a = "adsdadsadsa";
 
-	int ac = printf("A| %.1x\n", a);
-	int bc = ft_printf("B| %.1x\n", a);
-	printf("[%d][%d]", ac, bc);
+	int ac = printf("A| %s\n", a);
+	int bc = ft_printf("B| %s\n", a);
+	printf("[%d][%d]",ac, bc);
 }
